@@ -10,6 +10,3 @@ class EmployeeHomeView(TemplateView):
         context = super().get_context_data(**kwargs)
         context["title"] = "Employee Panel"
         return context
-    
-
-
