@@ -1,0 +1,8 @@
+Found existing installation: xhtml2pdf 0.2.9
+Uninstalling xhtml2pdf-0.2.9:
+  Would remove:
+    /home/empty/Desktop/Visitor Management System/VSM/venv/bin/pisa
+    /home/empty/Desktop/Visitor Management System/VSM/venv/bin/xhtml2pdf
+    /home/empty/Desktop/Visitor Management System/VSM/venv/lib/python3.8/site-packages/xhtml2pdf-0.2.9.dist-info/*
+    /home/empty/Desktop/Visitor Management System/VSM/venv/lib/python3.8/site-packages/xhtml2pdf/*
+Proceed (Y/n)? 
