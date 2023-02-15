@@ -1,0 +1,87 @@
+{% extends 'authority_base/base_authority.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block title %} {{title}} {% endblock title %}
+
+
+{% block body %}
+
+<div class="row g-4">
+    <div class="col-sm-12 col-xl-12">
+        <div class="bg-light rounded h-100 p-4">
+            <h6 class="mb-4">Present Address</h6>
+            <form action="" method="POST" enctype="multipart/form-data"> {% csrf_token %}
+                <div class="mb-3">
+                    <div class="row mb-4">
+                        <div class="col">
+                            <label for="exampleInputEmail1" class="form-label">Road Name/Road No</label>
+                            {{form.road|add_class:"form-control"}}
+                        </div>
+                        <div class="col">
+                            <label for="exampleInputEmail1" class="form-label">Village/Sector</label>
+                            {{form.sector|add_class:"form-control"}}
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col">
+                            <label for="exampleInputEmail1" class="form-label">Upzila/Police Station</label>
+                            {{form.police_station | add_class:"form-control" }}
+                        </div>
+                        <div class="col">
+                            <label for="exampleInputPassword1" class="form-label">City/State/Division</label>
+                            {{form.city | add_class:"form-control"}}
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col">
+                            <label for="exampleInputEmail1" class="form-label">District</label>
+                            {{form.district | add_class:"form-control" }}
+                        </div>
+                        <div class="col">
+                            <label for="exampleInputPassword1" class="form-label">Post Code</label>
+                            {{form.post_code| add_class:"form-control"}}
+                        </div>
+                    </div>
+                </div>
+                <h6 class="mb-4">Permanent Address</h6>
+                <div class="mb-3">
+                    <div class="row mb-4">
+                        <div class="col">
+                            <label for="exampleInputEmail1" class="form-label">Village/Road No</label>
+                            {{form2.village|add_class:"form-control"}}
+                        </div>
+                        <div class="col">
+                            <label for="exampleInputEmail1" class="form-label">Post Office</label>
+                            {{form2.post_office|add_class:"form-control"}}
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col">
+                            <label for="exampleInputEmail1" class="form-label">Upzila/Police Station</label>
+                            {{form2.upzila | add_class:"form-control" }}
+                        </div>
+                        <div class="col">
+                            <label for="exampleInputPassword1" class="form-label">City/State/Division</label>
+                            {{form2.division | add_class:"form-control"}}
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col">
+                            <label for="exampleInputEmail1" class="form-label">District</label>
+                            {{form2.permanent_district | add_class:"form-control" }}
+                        </div>
+                        <div class="col">
+                            <label for="exampleInputPassword1" class="form-label">Post Code</label>
+                            {{form2.zip_code| add_class:"form-control"}}
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Save</button>
+            </form>
+        </div>
+    </div>    
+</div>
+    
+{% endblock body %}
+    

@@ -1,0 +1,95 @@
+{% extends 'base_visitor/base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+
+{% block title %}
+    {{title}}
+    
+{% endblock title %}
+
+
+
+{% block body %}
+<!-- Form Start -->
+<div class="container-fluid pt-4 px-4 m-auto">
+    <div class="row g-4">
+        <div class="col-sm-12 col-xl-12">
+            <div class="bg-light rounded h-100 p-4">
+                <h6 class="mb-4">Basic Information</h6>
+                <form action="" method="POST" enctype="multipart/form-data"> {% csrf_token %}
+                    <div class="mb-3">
+                        <div class="row mb-4">
+                            <div class="col">
+                                <label for="exampleInputEmail1" class="form-label">First Name</label>
+                                {{form.first_name|add_class:"form-control" | append_attr:"placeholder:e.g Jon"}}
+                            </div>
+                            <div class="col">
+                                <label for="exampleInputEmail1" class="form-label">Lastname</label>
+                                {{form.last_name|add_class:"form-control" | append_attr:"placeholder:e.g Deo"}}
+                            </div>
+                        </div>
+                        <div class="row mb-4">
+                            <div class="col">
+                                <label for="exampleInputEmail1" class="form-label">Gender</label>
+                                {{form.gender | add_class:"form-select" }}
+                            </div>
+                            <div class="col">
+                                <label for="exampleInputPassword1" class="form-label">Photo</label>
+                                {{form.photo | add_class:"form-select"}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <div class="row mb-4">
+                            <div class="col">
+                                <label for="exampleInputEmail1" class="form-label">Phone Number</label>
+                                {{info_form.phone_no|add_class:"form-control"}}
+                            </div>
+                            <div class="col">
+                                <label for="exampleInputEmail1" class="form-label">NID Number</label>
+                                {{info_form.national_id|add_class:"form-control"}}
+                            </div>
+                        </div>
+                        <div class="row mb-4">
+                            <div class="col">
+                                <label for="exampleInputEmail1" class="form-label">Passport Number(Optional)</label>
+                                {{info_form.passport_no | add_class:"form-control" }}
+                            </div>
+                            <div class="col">
+                                <label for="exampleInputPassword1" class="form-label">Occupation</label>
+                                {{info_form.occupation | add_class:"form-control"}}
+                            </div>
+                        </div>
+                        <div class="row mb-4">
+                            <div class="col">
+                                <label for="exampleInputEmail1" class="form-label">Designation(Optional)</label>
+                                {{info_form.designation | add_class:"form-control" }}
+                            </div>
+                            <div class="col">
+                                <label for="exampleInputPassword1" class="form-label">Organization(Optional)</label>
+                                {{info_form.organization| add_class:"form-control"}}
+                            </div>
+                        </div>
+                        <div class="row mb-4">
+                            <div class="col">
+                                <label for="exampleInputEmail1" class="form-label">Organization Address</label>
+                                {{info_form.organization_address| add_class:"form-control" }}
+                            </div>
+                            <div class="col">
+                                <label for="exampleInputPassword1" class="form-label">About(Optional)</label>
+                                {{info_form.bio| add_class:"form-control"}}
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </form>
+            </div>
+        </div>    
+    </div>
+</div>
+<!-- Form End -->
+    
+{% endblock body %}
+    
+    
