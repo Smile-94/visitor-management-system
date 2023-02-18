@@ -57,7 +57,7 @@ class AddEmployeeView(LoginRequiredMixin, AdminPassesTestMixin, CreateView):
         messages.error(self.request, "email or password invalid try aging")
         return super().form_invalid(form)
 
-class EmployeeDetailView(DetailView):
+class EmployeeDetailView(LoginRequiredMixin, AdminPassesTestMixin, DetailView):
     model = User
     context_object_name='employee'
     template_name = 'authority/employee_details.html'
@@ -68,7 +68,7 @@ class EmployeeDetailView(DetailView):
         return context
     
 
-class AddEmployeeInfoView(UpdateView):
+class AddEmployeeInfoView(LoginRequiredMixin, AdminPassesTestMixin, UpdateView):
     model = User
     model2 = EmployeeInfo
     form_class = ProfileForm
@@ -116,7 +116,7 @@ class AddEmployeeInfoView(UpdateView):
         return super().form_invalid(form)
 
 
-class AddEmployeeAddressView(UpdateView):
+class AddEmployeeAddressView(LoginRequiredMixin, AdminPassesTestMixin, UpdateView):
     model = User
     model2 = PresentAddress
     form_class = PresentAddressForm
@@ -163,7 +163,7 @@ class AddEmployeeAddressView(UpdateView):
         messages.error(self.request, "Some thing wrong try again")
         return super().form_invalid(form)
 
-class DeleteEmployeeView(DeleteView):
+class DeleteEmployeeView( LoginRequiredMixin, AdminPassesTestMixin, DeleteView):
     model= User
     context_object_name='employee'
     template_name = "authority/delete_employee.html"

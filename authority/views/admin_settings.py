@@ -2,6 +2,10 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.contrib import messages
 
+# Permission Classes
+from django.contrib.auth.mixins import LoginRequiredMixin
+from authority.permission import AdminPassesTestMixin
+
 # Filters
 from employee.filters import DesignationInfoFilter
 
@@ -15,7 +19,7 @@ from employee.models import DesignationInfo
 # Forms 
 from employee.forms import DesignationInfoForm
 
-class DesignationSettingsView(CreateView):
+class DesignationSettingsView(LoginRequiredMixin, AdminPassesTestMixin, CreateView):
     model = DesignationInfo
     queryset= DesignationInfo.objects.filter(is_active=True)
     form_class = DesignationInfoForm
@@ -38,7 +42,7 @@ class DesignationSettingsView(CreateView):
         return super().form_invalid(form)
     
 
-class DesignationUpdateView(UpdateView):
+class DesignationUpdateView(LoginRequiredMixin, AdminPassesTestMixin, UpdateView):
     model = DesignationInfo
     fields = ('designation', 'department', 'description')
     template_name = 'authority/add_designation.html'

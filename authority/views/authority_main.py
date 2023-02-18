@@ -1,7 +1,6 @@
 
 # Permissions and Authorization
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth.mixins import UserPassesTestMixin
 
 # custom UserpassTestMixin
 from authority.permission import AdminPassesTestMixin
