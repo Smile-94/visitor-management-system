@@ -2,6 +2,7 @@ from django import forms
 
 # models
 from appointment.models import Appointment
+from appointment.models import AppointmentApplication
 
 
 class AppointmentForm(forms.ModelForm):
@@ -13,9 +14,15 @@ class AppointmentForm(forms.ModelForm):
         model=Appointment
         fields = ('appointment_date','meet_from','meet_to',)
 
-
 class AppointmentCancelForm(forms.ModelForm):
 
     class Meta:
         model = Appointment
         fields = ('cancel_message',)
+
+
+class AppointmentApplicationForm(forms.ModelForm):
+
+    class Meta:
+        model = AppointmentApplication
+        fields = ('heading','description')

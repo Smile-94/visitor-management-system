@@ -6,10 +6,9 @@ from django.shortcuts import HttpResponseRedirect
 
 # Permission Classes
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth.mixins import UserPassesTestMixin
+from visitor.permission import VisitorPassesTestMixin
 
 # Django class based view
-from django.views import View
 from django.views.generic import DetailView
 from django.views.generic import UpdateView
 
@@ -28,7 +27,7 @@ from visitor.forms import VisitorInfoForm
 
 
 
-class VisitorProfile(LoginRequiredMixin, UserPassesTestMixin, DetailView):
+class VisitorProfileView(LoginRequiredMixin, VisitorPassesTestMixin, DetailView):
     queryset = Profile.objects.all()
     context_object_name = 'profile'
     template_name = 'visitor/profile.html'
@@ -46,7 +45,7 @@ class VisitorProfile(LoginRequiredMixin, UserPassesTestMixin, DetailView):
         return context
     
 
-class EditProfileView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+class EditProfileView(LoginRequiredMixin, VisitorPassesTestMixin, UpdateView):
     model = Profile
     model2 = VisitorInfo
     form_class = ProfileForm
@@ -77,7 +76,7 @@ class EditProfileView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         return super().form_valid(form,)
     
 
-class EditAddressView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+class EditAddressView(LoginRequiredMixin, VisitorPassesTestMixin, UpdateView):
     model = PresentAddress
     model2 = PermanentAddress
     form_class = PresentAddressForm
