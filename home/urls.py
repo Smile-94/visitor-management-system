@@ -7,6 +7,7 @@ app_name = 'home'
 
 urlpatterns = [
 
-    path('', home_view.HomveView.as_view(), name='index')
+    path('', home_view.HomveView.as_view(), name='index'),
+    path('contact-message/', home_view.ContactMessageView.as_view(), name='contact_message'),
     
 ]

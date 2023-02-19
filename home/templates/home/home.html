@@ -1,7 +1,8 @@
 {% extends 'home_base/home_base.html' %}
 {% load static %}
+{% load widget_tweaks %}
 
-{% block title %}{% endblock title %}
+{% block title %} {{title}} {% endblock title %}
 
 
 {% block body %}
@@ -176,26 +177,29 @@
             </div>
 
           </div>
-
-          <div class="col-lg-7 mt-5 mt-lg-0 d-flex align-items-stretch">
-            <form action="forms/contact.php" method="post" role="form" class="php-email-form">
+          
+          
+        <div class="col-lg-7 mt-5 mt-lg-0 d-flex align-items-stretch">
+            <div class="form-container">
+            <form id="my-form" action="{% url 'home:contact_message' %}" method="post" role="form" class="php-email-form"> 
+              {% csrf_token %}
               <div class="row">
                 <div class="form-group col-md-6">
                   <label for="name">Your Name</label>
-                  <input type="text" name="name" class="form-control" id="name" required>
+                  {{form.name |add_class:"form-control"}}
                 </div>
                 <div class="form-group col-md-6">
                   <label for="name">Your Email</label>
-                  <input type="email" class="form-control" name="email" id="email" required>
+                  {{form.email |add_class:"form-control"}}
                 </div>
               </div>
               <div class="form-group">
                 <label for="name">Subject</label>
-                <input type="text" class="form-control" name="subject" id="subject" required>
+                {{form.subject |add_class:"form-control"}}
               </div>
               <div class="form-group">
                 <label for="name">Message</label>
-                <textarea class="form-control" name="message" rows="10" required></textarea>
+                {{form.message |add_class:"form-control"}}
               </div>
               <div class="my-3">
                 <div class="loading">Loading</div>
@@ -205,6 +209,7 @@
               <div class="text-center"><button type="submit">Send Message</button></div>
             </form>
           </div>
+          
 
         </div>
 
@@ -213,4 +218,36 @@
 
   </main><!-- End #main -->
 
+  <script>
+    $(document).ready(function() {
+      $('#my-form').on('submit', function(event) {
+        event.preventDefault();
+        var formData = $(this).serialize();
+        $.ajax({
+          type: 'POST',
+          url: $(this).attr('action'),
+          data: formData,
+          success: function(response) {
+            if (response.message === 'success') {
+              // clear any previous error messages
+              $('.error-message').empty();
+              $('#my-form').html('<p class="success-message">Thank you for your message!</p>');
+              // update the page content
+              // ...
+            } else if (response.message === 'error') {
+              // display the error message
+              $('.error-message').html('<div class="alert alert-danger" role="alert">' + response.data.error_message + '</div>');
+            }
+          },
+          error: function(xhr, status, error) {
+            // handle the error response here
+          }
+        });
+      });
+    });
+     
+
+
+  </script>
+  
 {% endblock body %}

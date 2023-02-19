@@ -4,7 +4,7 @@ from django import forms
 from home.models import ContactMessage
 
 
-class ContactMessage(forms.ModelForm):
+class ContactMessageForm(forms.ModelForm):
 
     class Meta:
         model = ContactMessage
