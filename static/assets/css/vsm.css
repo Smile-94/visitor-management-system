@@ -1136,6 +1136,8 @@ section {
 
 .team .member .pic img {
   transition: ease-in-out 0.3s;
+  width: 180px;
+  height: 180px;
 }
 
 .team .member:hover {
