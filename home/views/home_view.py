@@ -28,7 +28,7 @@ class HomveView(TemplateView):
 class EmployeeListView(ListView):
     model = EmployeeInfo
     queryset = EmployeeInfo.objects.filter(is_active=True)
-    context_object_name = 'emplyees'
+    context_object_name = 'employees'
     template_name = 'home/appointment.html' 
 
     def get_context_data(self, **kwargs):

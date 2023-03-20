@@ -32,13 +32,13 @@
       <div class="container" data-aos="fade-up">
 
         <div class="section-title">
-          <h2>Team</h2>
+          <h2>Employee List</h2>
         </div>
 
         <div class="row">
-            {% if emplyees %}
+            {% if employees %}
                 
-                {% for employee in emplyees %}
+                {% for employee in employees %}
                 <div class="col-lg-6" data-aos="zoom-in" data-aos-delay="100">
                     <div class="member d-flex align-items-start">
                       <div class="pic"><img src="{{employee.info_of.profile.photo.url}}" alt="" width="180" height="190"></div>
