@@ -12,8 +12,8 @@ urlpatterns = [
 
 
 urlpatterns += [
-    
     path('profile/<int:pk>/', manage_profile.VisitorProfileView.as_view(), name='profile'),
     path('edit-visitor-profile/<int:pk>/', manage_profile.EditProfileView.as_view(), name='edit_profile'),
     path('edit-address/<int:pk>/', manage_profile.EditAddressView.as_view(), name='edit_address'),
+    path('edit-media-link/<int:pk>/', manage_profile.UpdateMediaLinkView.as_view(), name='edit_media_link'),
 ]

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Details</title>
+    <style>
+        .table-container {
+            margin-bottom: 10px;
+          }
+
+        h2 {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 5px;
+          }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            max-width: 400px;
+            margin: 0 auto;
+            background-color: #e1f1fb;
+            border-radius: 10px;
+            font-size: 15px;
+          }
+          
+          td {
+            padding: 5px;
+            text-align: left;
+            border-bottom: 1px solid #000;
+          }
+          
+          .label {
+            width: 30%;
+            background-color: #FFACAC;
+            font-weight: bold;
+            color: #000;
+            text-align: right;
+            border-radius: 10px 0 0 10px;
+          }
+
+          .profile-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            border-radius: 10px;
+            font-size: 16px;
+          }
+          
+          .photo {
+            margin-right: 20px;
+            margin-bottom: 5px;
+          }
+          
+          .photo img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+          }
+          
+          .details {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            color: #6b5b95;
+          }
+          
+          .designation {
+            font-weight: bold;
+            margin-bottom: 2px;
+          }
+          
+          .department {
+            font-style: italic;
+            margin-bottom: 2px;
+          }
+          
+          
+
+    </style>
+</head>
+<body>
+    <div class="profile-container">
+        <div class="photo">
+          <img src="/media/{{user.profile.photo}}" alt="Profile Photo">
+        </div>
+        <div class="details">
+          <div class="designation"> {{user.visitor_info.occupation}} ({{user.visitor_info.designation}}) </div>
+          <div class="department"> {{user.visitor_info.organization}} </div>
+        </div>
+      </div>
+      <div class="table-container">
+        <h2>Profile Details</h2>
+        <table>
+            <tr>
+              <td class="label">Full Name:</td>
+              <td> {{user.profile.first_name}} {{user.profile.last_name}}</td>
+            </tr>
+            <tr>
+              <td class="label">Email:</td>
+              <td> {{user.email}} </td>
+            </tr>
+            <tr>
+              <td class="label">Phone:</td>
+              <td> {{user.visitor_info.phone_no}} </td>
+            </tr>
+            <tr>
+              <td class="label">NID</td>
+              <td> {{user.visitor_info.national_id}} </td>
+            </tr>
+            <tr>
+              <td class="label">Organization Address</td>
+              <td> {{user.visitor_info.organization_address}} </td>
+            </tr>
+          </table>
+      </div>
+      <div class="table-container">
+        <h2>Present Address</h2>
+        <table>
+            <tr>
+              <td class="label">Road/Village:</td>
+              <td> {{user.present_address.road}} </td>
+            </tr>
+            <tr>
+              <td class="label">Sector/Avenue:</td>
+              <td> {{user.present_address.sector}} </td>
+            </tr>
+            <tr>
+              <td class="label">Police Station:</td>
+              <td> {{user.present_address.police_station}} </td>
+            </tr>
+            <tr>
+              <td class="label">City/Division:</td>
+              <td> {{user.present_address.city}} </td>
+            </tr>
+            <tr>
+              <td class="label">District:</td>
+              <td> {{user.present_address.district}} </td>
+            </tr>
+            <tr>
+              <td class="label">Zip:</td>
+              <td> {{user.present_address.post_code}} </td>
+            </tr>
+          </table>
+      </div>     
+</body>
+</html>

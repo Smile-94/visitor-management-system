@@ -18,12 +18,14 @@ from accounts.models import Profile
 from accounts.models import PresentAddress
 from accounts.models import PermanentAddress
 from visitor.models import VisitorInfo
+from visitor.models import VisitorMediaLink
 
 # Forms
 from accounts.forms import ProfileForm
 from accounts.forms import PresentAddressForm
 from accounts.forms import PermanentAddressForm
 from visitor.forms import VisitorInfoForm
+from visitor.forms import VisitorMediaLinkForm
 
 
 
@@ -64,7 +66,7 @@ class EditProfileView(LoginRequiredMixin, VisitorPassesTestMixin, UpdateView):
         return context
     
     def post(self, request, *args, **kwargs):
-        form = self.form_class(request.POST, instance=self.request.user.profile)
+        form = self.form_class(request.POST,request.FILES, instance=self.request.user.profile)
         form2 = self.form_class2(request.POST, instance=self.request.user.visitor_info)
         return self.form_valid(form, form2)
     
@@ -109,3 +111,23 @@ class EditAddressView(LoginRequiredMixin, VisitorPassesTestMixin, UpdateView):
     def form_invalid(self, form):
         messages.error(self.request, "Some thing went wrong try again")
         return super().form_invalid(form)
+
+class UpdateMediaLinkView(LoginRequiredMixin, VisitorPassesTestMixin, UpdateView):
+    model = VisitorMediaLink
+    form_class = VisitorMediaLinkForm
+    template_name = 'visitor/edit_media_link.html'
+    success_url = reverse_lazy('visitor:visitor_home')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["title"] = "Add/Update Profile Media Link" 
+        return context
+
+    def form_valid(self, form):
+        messages.success(self.request, "Visitor Medial Link Added/Update Successfully")
+        return super().form_valid(form)
+    
+    def form_invalid(self, form):
+        messages.error(self.request, "Some thing wrong try again")
+        return super().form_invalid(form)
+    

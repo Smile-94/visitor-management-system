@@ -20,8 +20,8 @@
                       <h4> {{profile.first_name}} {{profile.last_name}} </h4>
                       <p class="text-secondary mb-1"> {{request.user.email}} </p>
                       <p class="text-muted font-size-sm">{{visitorinfo.designation}}, {{visitorinfo.organization}} </p>
-                      <button class="btn btn-primary">Download Profile</button>
-                      <button class="btn btn-outline-primary">Print Profile</button>
+                      <a class="btn btn-primary" href="{% url 'report:visitor_profile' request.user.id %}" target="_blank">Download Profile</a>
+                      <a class="btn btn-outline-primary" href="{% url 'report:visitor_profile' request.user.id %}" target="_blank">Print Profile</a>
                     </div>
                   </div>
                 </div>

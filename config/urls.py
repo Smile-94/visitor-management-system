@@ -12,6 +12,7 @@ from accounts import urls as accounts_urls
 from visitor import urls as visitor_urls
 from authority import urls as authority_urls
 from employee import urls as employee_urls
+from report import urls as report_urls
 
 
 urlpatterns = [
@@ -21,6 +22,7 @@ urlpatterns = [
     path("", include(visitor_urls)),
     path("", include(authority_urls)),
     path("", include(employee_urls)),
+    path("", include(report_urls)),
 ]
 
 # for serve static files

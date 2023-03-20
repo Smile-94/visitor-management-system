@@ -1,5 +1,6 @@
 from django.contrib import admin
 from visitor.models import VisitorInfo
+from visitor.models import VisitorMediaLink
 
 
 # Register your models here.
@@ -9,3 +10,7 @@ class VisitorInfoAdmin(admin.ModelAdmin):
     search_fields=('user','phone_number',)
     list_filter=('designation',)
     list_per_page=50
+
+@admin.register(VisitorMediaLink)
+class VisitorMediaLinkAdmin(admin.ModelAdmin):
+    list_display = ('link_of',)

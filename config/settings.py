@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'authority.apps.AuthorityConfig',
     'employee.apps.EmployeeConfig',
     'appointment.apps.AppointmentConfig',
+    'report.apps.ReportConfig',
     # Third party packages
     'widget_tweaks',
     'django_filters',

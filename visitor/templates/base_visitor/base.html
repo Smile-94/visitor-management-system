@@ -63,6 +63,7 @@
                             <a href="{% url 'visitor:profile' request.user.profile.id %}" class="nav-link dropdown-item"><i class="fa-solid fa-eye"></i>View Profile</a>
                             <a href="{% url 'visitor:edit_profile' request.user.profile.id %}" class="nav-link dropdown-item"><i class="fa-solid fa-user-pen"></i>Add/Edit Profile</a>
                             <a href="{% url 'visitor:edit_address' request.user.present_address.id %}" class="nav-link dropdown-item"><i class="fa-solid fa-user-pen"></i>Add/Edit Address</a>
+                            <a href="{% url 'visitor:edit_media_link' request.user.visitor_link.id %}" class="nav-link dropdown-item"><i class="fa-solid fa-user-pen"></i>Add/Edit Link</a>
                         </div>
                     </div>
                     <a href="widget.html" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Widgets</a>
