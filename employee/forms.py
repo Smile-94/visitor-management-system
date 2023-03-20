@@ -3,6 +3,7 @@ from django import forms
 # models
 from employee.models import EmployeeInfo
 from employee.models import DesignationInfo
+from employee.models import SocialMediaLink
 
 # Widgets
 from employee.widgets import CustomPictureImageFieldWidget
@@ -24,3 +25,9 @@ class DesignationInfoForm(forms.ModelForm):
     class Meta:
         model = DesignationInfo
         exclude = ('is_active',)
+
+class SocialMediaLinkForm(forms.ModelForm):
+
+    class Meta:
+        model = SocialMediaLink
+        exclude = ('link_of',)

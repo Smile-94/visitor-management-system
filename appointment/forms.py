@@ -14,12 +14,6 @@ class AppointmentForm(forms.ModelForm):
         model=Appointment
         fields = ('appointment_date','meet_from','meet_to',)
 
-class AppointmentCancelForm(forms.ModelForm):
-
-    class Meta:
-        model = Appointment
-        fields = ('cancel_message',)
-
 
 class AppointmentApplicationForm(forms.ModelForm):
 

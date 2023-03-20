@@ -103,7 +103,6 @@
               <th scope="col">Date</th>
               <th scope="col">Start Time</th>
               <th scope="col">End Time</th>
-              <th scope="col">Cancel Status</th>
               <th scope="col">Action</th>
             </tr>
           </thead>
@@ -115,12 +114,6 @@
                     <td> {{appointment.appointment_date}} </td>
                     <td> {{appointment.meet_from}} </td>
                     <td>{{appointment.meet_to}}</td>
-                    <td> 
-                        {% if appointment.cancel_status %} 
-                            <button class="btn btn-danger"><i class="fa-solid fa-xmark"></i></button> 
-                            {% else %}
-                            <a class="btn btn-success" href="{% url 'employee:cancel_appointment' appointment.id %}" role="button"><i class="fa-solid fa-check"></i></a>
-                            {% endif %} </td>
                     <td>
                         <a class="btn btn-success" href="{% url 'employee:update_appointment' appointment.id %}" role="button"><i class="fa-solid fa-pen-to-square"></i></a>
                         <a class="btn btn-danger" href="{% url 'employee:delete_appointment' appointment.id %}" role="button"><i class="fa-solid fa-trash"></i></a>

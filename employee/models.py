@@ -67,3 +67,13 @@ class EmployeeInfo(models.Model):
 
     def __str__(self):
         return str(f"{self.info_of}'s Info")
+
+class SocialMediaLink(models.Model):
+    link_of = models.OneToOneField(User, on_delete=models.CASCADE, related_name='media_link')
+    twitter = models.URLField(max_length=200)
+    facebook = models.URLField(max_length=200)
+    instagram = models.URLField(max_length=200)
+    linkedin = models.URLField(max_length=200)
+
+    def __str__(self):
+        return str(self.link_of)

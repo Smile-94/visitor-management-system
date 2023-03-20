@@ -58,16 +58,21 @@
                 <div class="navbar-nav w-100">
                     <a href="index.html" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
                     <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa-solid fa-user"></i>Profile</a>
+                        <div class="dropdown-menu bg-transparent border-0">
+                            <a href="{% url 'employee:employee_profile_details' request.user.employee_info.id %}" class="dropdown-item"><i class="fa-solid fa-user me-2"></i>My Profile</a>
+                            <a href="{% url 'employee:add_appointment' %}" class="dropdown-item"><i class="fa-solid fa-user me-2"></i> Socila Media Link</a>
+                        </div>
+                    </div>
+                    <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa-solid fa-calendar-check me-2"></i>Appointment</a>
                         <div class="dropdown-menu bg-transparent border-0">
-                            <a href="{% url 'employee:add_appointment' %}" class="dropdown-item"><i class="fa-solid fa-calendar-check me-2"></i>Manage Appointment</a>
-                            <a href="typography.html" class="dropdown-item">Typography</a>
-                            <a href="element.html" class="dropdown-item">Other Elements</a>
+                            <a href="{% url 'employee:add_appointment' %}" class="dropdown-item"><i class="fa-solid fa-calendar-check me-2"></i>Add Appointment</a>
                         </div>
                     </div>
 
                     <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="far fa-file-alt me-2"></i>Pages</a>
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="far fa-file-alt me-2"></i>Settings</a>
                         <div class="dropdown-menu bg-transparent border-0">
                             <a href="signin.html" class="dropdown-item">Sign In</a>
                             <a href="signup.html" class="dropdown-item">Sign Up</a>

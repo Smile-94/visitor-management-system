@@ -10,10 +10,16 @@ class Appointment(models.Model):
     appointment_date=models.DateField(auto_now=False, auto_now_add=False)
     meet_from=models.TimeField(auto_now=False, auto_now_add=False)
     meet_to=models.TimeField(auto_now=False, auto_now_add=False)
+    visiting_hour = models.DurationField(blank=True, null=True)
     is_active=models.BooleanField(default=True)
-    cancel_status=models.BooleanField(default=False)
-    cancel_message=models.CharField(max_length=200,blank=True,null=True)
 
+    def save(self, *args, **kwargs):
+        from_time = datetime.combine(datetime.today(), self.meet_from)
+        to_time = datetime.combine(datetime.today(), self.meet_to)
+        duration = to_time - from_time
+        self.visiting_hour = duration
+        super().save(*args, **kwargs)
+    
     def __str__(self):
         return str(self.appointment_of)+str(self.appointment_date)
 
@@ -31,6 +37,8 @@ class AppointmentApplication(models.Model):
     meeting_time = models.TimeField(auto_now=False, auto_now_add=False,blank=True)
     message = models.TextField()
     decline_status = models.BooleanField(default=False)
+    cancel_status=models.BooleanField(default=False)
+    cancel_message=models.CharField(max_length=200,blank=True,null=True)
     is_active = models.BooleanField(default=True)
     
 
