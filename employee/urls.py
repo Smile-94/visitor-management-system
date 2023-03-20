@@ -14,7 +14,8 @@ urlpatterns = [
 
 # Manage Profile 
 urlpatterns += [
-    path('employee-profile-details/<int:pk>/', manage_profile.EmployeeProfileView.as_view(), name='employee_profile_details')
+    path('employee-profile-details/<int:pk>/', manage_profile.EmployeeProfileView.as_view(), name='employee_profile_details'),
+    path('add-update-social-media-link/<int:pk>/', manage_profile.EmployeeSocialMediaLinkView.as_view(), name='add_update_social_media_link')
     
 ]
 
