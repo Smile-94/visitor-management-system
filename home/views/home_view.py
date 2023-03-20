@@ -5,10 +5,12 @@ from django.contrib import messages
 # Generic View Class
 from django.views.generic import TemplateView
 from django.views.generic import CreateView
+from django.views.generic import ListView
 
 
 # Models
 from home.models import ContactMessage
+from employee.models import EmployeeInfo
 
 # forms
 from home.forms import ContactMessageForm
@@ -22,6 +24,18 @@ class HomveView(TemplateView):
         context["title"] = "Home" 
         context["form"] = self.form_class
         return context
+
+class EmployeeListView(ListView):
+    model = EmployeeInfo
+    queryset = EmployeeInfo.objects.filter(is_active=True)
+    context_object_name = 'emplyees'
+    template_name = 'home/appointment.html' 
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["title"] = "Appointment" 
+        return context
+    
 
 class ContactMessageView(CreateView):
     model = ContactMessage
