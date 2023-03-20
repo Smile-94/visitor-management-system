@@ -43,6 +43,7 @@ class VisitorProfileView(LoginRequiredMixin, VisitorPassesTestMixin, DetailView)
         context["visitorinfo"] = VisitorInfo.objects.get(user=self.request.user)
         context["present_address"] = PresentAddress.objects.get(address_of=self.request.user)
         context["permanent_address"] = PermanentAddress.objects.get(address_of=self.request.user)
+        context["media_link"] = VisitorMediaLink.objects.get(link_of=self.request.user)
          
         return context
     
