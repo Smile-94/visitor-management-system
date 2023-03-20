@@ -10,7 +10,7 @@
 {% block body %}
 <div class="container mt-4">
   <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-4">
-    <a class="btn btn-primary" href="{% url 'authority:add_employee' %}" role="button"><i class="fa-solid fa-arrow-left me-2"></i>Back</a>
+    <a class="btn btn-primary" href="{% url 'authority:visitor_list' %}" role="button"><i class="fa-solid fa-arrow-left me-2"></i>Back</a>
   </div>
     <div class="main-body">
           <div class="row gutters-sm">
@@ -18,13 +18,14 @@
               <div class="card">
                 <div class="card-body">
                   <div class="d-flex flex-column align-items-center text-center">
-                    <img src=" {{employee.employee_info.photo.url}} " alt="Admin" class="rounded-circle" width="250" height="250">
+                    <img src=" {{visitor.profile.photo.url}} " alt="Admin" class="rounded-circle" width="250" height="250">
                     <div class="mt-3">
-                      <h4> {{employee.profile.first_name}} {{employee.profile.last_name}} </h4>
-                      <p class="text-secondary mb-1"> {{employee.employee_info.position.designation}} </p>
-                      <p class="text-secondary mb-1"> {{employee.employee_info.position.department}} </p>
-                      <a class="btn btn-primary" href="{% url 'report:employee_profile' employee.id %}" target="_blank">Download Profile</a>
-                      <a class="btn btn-outline-primary" href="{% url 'report:employee_profile' employee.id %}" target="_blank">Print Profile</a>
+                      <h4> {{visitor.profile.first_name}} {{visitor.profile.last_name}} </h4>
+                      <p class="text-secondary mb-1"> {{visitor.visitor_info.occupation}} </p>
+                      <p class="text-secondary mb-1"> {{visitor.visitor_info.designation}} </p>
+                      <p class="text-secondary mb-1"> {{visitor.visitor_info.organization}} </p>
+                      <a class="btn btn-primary" href="{% url 'report:visitor_profile' visitor.id %}" target="_balnk" >Download Profile</a>
+                      <a class="btn btn-outline-primary" href="{% url 'report:visitor_profile' visitor.id %}" target="_balnk">Print Profile</a>
                     </div>
                   </div>
                 </div>
@@ -38,7 +39,7 @@
                       <h6 class="mb-0">Full Name: </h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                      {{employee.profile.first_name}} {{employee.profile.last_name}}
+                      {{visitor.profile.first_name}} {{visitor.profile.last_name}}
                     </div>
                   </div>
                   <hr>
@@ -47,7 +48,7 @@
                       <h6 class="mb-0">Email</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                      {{employee.email}}
+                      {{visitor.email}}
                     </div>
                   </div>
                   <hr>
@@ -56,7 +57,7 @@
                       <h6 class="mb-0">Employee ID</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                      {{employee.employee_info.employee_id}}
+                      {{visitor.visitor_info.visitor_id}}
                     </div>
                   </div>
                   <hr>
@@ -65,7 +66,7 @@
                       <h6 class="mb-0">Contact No</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                      {{employee.employee_info.phone}}
+                      {{visitor.visitor_info.phone_no}}
                     </div>
                   </div>
                   <hr>
@@ -74,7 +75,7 @@
                       <h6 class="mb-0">NID Number</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                      {{employee.employee_info.national_id}}
+                      {{visitor.visitor_info.national_id}}
                     </div>
                   </div>
                   <hr>
@@ -83,25 +84,25 @@
                       <h6 class="mb-0">Passport Number</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                      {{employee.employee_info.passport_no}}
+                      {{visitor.visitor_info.passport_no}}
                     </div>
                   </div>
                   <hr>
                   <div class="row">
                     <div class="col-sm-3">
-                      <h6 class="mb-0">Designation</h6>
+                      <h6 class="mb-0">Organization</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                      {{employee.employee_info.position.designation}}
+                      {{visitor.visitor_info.organization}}
                     </div>
                   </div>
                   <hr>
                   <div class="row">
                     <div class="col-sm-3">
-                      <h6 class="mb-0">Department</h6>
+                      <h6 class="mb-0">Organization Address</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                      {{employee.employee_info.position.department}}
+                      {{visitor.visitor_info.organization_address}}
                     </div>
                   </div>
                   <hr>
@@ -116,27 +117,27 @@
                         <ul class="list-group list-group-flush">
                           <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                             <h6 class="mb-0">Road/Village</h6>
-                            <span class="text-secondary">{{employee.present_address.road}} </span>
+                            <span class="text-secondary">{{visitor.present_address.road}} </span>
                           </li>
                           <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                             <h6 class="mb-0">Sector/Avenue</h6>
-                            <span class="text-secondary">{{employee.present_address.sector}}</span>
+                            <span class="text-secondary">{{visitor.present_address.sector}}</span>
                           </li>
                           <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                             <h6 class="mb-0">Police Station</h6>
-                            <span class="text-secondary">{{employee.present_address.police_station}}</span>
+                            <span class="text-secondary">{{visitor.present_address.police_station}}</span>
                           </li>
                           <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                             <h6 class="mb-0">City/Division</h6>
-                            <span class="text-secondary">{{employee.present_address.city}}</span>
+                            <span class="text-secondary">{{visitor.present_address.city}}</span>
                           </li>
                           <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                             <h6 class="mb-0">District</h6>
-                            <span class="text-secondary">{{employee.present_address.district}}</span>
+                            <span class="text-secondary">{{visitor.present_address.district}}</span>
                           </li>
                           <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                             <h6 class="mb-0">Post Code</h6>
-                            <span class="text-secondary">{{employee.present_address.post_code}}</span>
+                            <span class="text-secondary">{{visitor.present_address.post_code}}</span>
                           </li>
                         </ul>
                       </div>
@@ -151,27 +152,27 @@
                         <ul class="list-group list-group-flush">
                           <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                             <h6 class="mb-0">Road/Village</h6>
-                            <span class="text-secondary">{{employee.permanent_address.village}} </span>
+                            <span class="text-secondary">{{visitor.permanent_address.village}} </span>
                           </li>
                           <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                             <h6 class="mb-0">Sector/Avenue</h6>
-                            <span class="text-secondary">{{employee.permanent_address.post_office}}</span>
+                            <span class="text-secondary">{{visitor.permanent_address.post_office}}</span>
                           </li>
                           <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                             <h6 class="mb-0">Police Station</h6>
-                            <span class="text-secondary">{{employee.permanent_address.upzila}}</span>
+                            <span class="text-secondary">{{visitor.permanent_address.upzila}}</span>
                           </li>
                           <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                             <h6 class="mb-0">City/Division</h6>
-                            <span class="text-secondary">{{employee.permanent_address.division}}</span>
+                            <span class="text-secondary">{{visitor.permanent_address.division}}</span>
                           </li>
                           <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                             <h6 class="mb-0">District</h6>
-                            <span class="text-secondary">{{employee.permanent_address.permanent_district}}</span>
+                            <span class="text-secondary">{{visitor.permanent_address.permanent_district}}</span>
                           </li>
                           <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                             <h6 class="mb-0">Post Code</h6>
-                            <span class="text-secondary">{{employee.permanent_address.zip_code}}</span>
+                            <span class="text-secondary">{{visitor.permanent_address.zip_code}}</span>
                           </li>
                         </ul>
                       </div>

@@ -24,3 +24,22 @@ class VisittorProvilePdfView(PdfMixin, DetailView):
         filename = "profile_{0}.pdf".format(self.object.pk)
         response['Content-Disposition'] = 'filename="{}"'.format(filename)
         return response
+
+class EmployeeProfileView(PdfMixin, DetailView):
+    model = User
+    context_object_name = 'user'
+    template_name = "report/employee_profile.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['static_url'] = self.request.build_absolute_uri(settings.STATIC_URL)
+        return context
+    
+    
+    def get(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        context = self.get_context_data(object=self.object)
+        response = self.render_to_response(context)
+        filename = "profile_{0}.pdf".format(self.object.pk)
+        response['Content-Disposition'] = 'filename="{}"'.format(filename)
+        return response

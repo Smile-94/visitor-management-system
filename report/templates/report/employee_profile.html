@@ -89,8 +89,8 @@
           <img src="/media/{{user.profile.photo}}" alt="Profile Photo">
         </div>
         <div class="details">
-          <div class="designation"> {{user.visitor_info.occupation}} ({{user.visitor_info.designation}}) </div>
-          <div class="department"> {{user.visitor_info.organization}} </div>
+          <div class="designation"> {{user.employee_info.position.designation}}</div>
+          <div class="designation"> {{user.employee_info.position.department}}</div>
         </div>
       </div>
       <div class="table-container">
@@ -105,20 +105,16 @@
               <td> {{user.email}} </td>
             </tr>
             <tr>
-              <td class="label">Visitor ID</td>
-              <td> {{user.visitor_info.visitor_id}} </td>
+              <td class="label">Employee ID</td>
+              <td> {{user.employee_info.employee_id}} </td>
             </tr>
             <tr>
               <td class="label">Phone:</td>
-              <td> {{user.visitor_info.phone_no}} </td>
+              <td> {{user.employee_info.phone}} </td>
             </tr>
             <tr>
-              <td class="label">NID</td>
-              <td> {{user.visitor_info.national_id}} </td>
-            </tr>
-            <tr>
-              <td class="label">Organization Address</td>
-              <td> {{user.visitor_info.organization_address}} </td>
+              <td class="label">Joining Date</td>
+              <td> {{user.employee_info.joining_date}} </td>
             </tr>
           </table>
       </div>

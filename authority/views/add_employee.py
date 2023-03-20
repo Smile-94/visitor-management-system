@@ -171,7 +171,7 @@ class DeleteEmployeeView( LoginRequiredMixin, AdminPassesTestMixin, DeleteView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["title"] = "Delete Payroll Month" 
+        context["title"] = "Delete Visitor" 
         return context
 
     def form_valid(self, form):

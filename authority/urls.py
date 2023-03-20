@@ -4,6 +4,7 @@ from django.urls import path
 from authority.views import authority_main
 from authority.views import add_employee
 from authority.views import admin_settings
+from authority.views import manage_visitor
 
 
 app_name = 'authority'
@@ -22,6 +23,15 @@ urlpatterns += [
     path('employee-detail/<int:pk>/', add_employee.EmployeeDetailView.as_view(), name="employee_detail"),
     path('delete-employee/<int:pk>/', add_employee.DeleteEmployeeView.as_view(), name="delete_employee"),
 ]
+
+# Manage Visitor
+urlpatterns += [
+    path('visitor-list/', manage_visitor.VisitorListView.as_view(), name='visitor_list'),
+    path('visitor-details/<int:pk>/', manage_visitor.VisitorDetailView.as_view(), name='visitor_details'),
+    path('delete-visitor/<int:pk>/', manage_visitor.DeleteVisitorView.as_view(), name='delete_visitor')
+    
+]
+
 
 # Admin Settings url path
 urlpatterns += [

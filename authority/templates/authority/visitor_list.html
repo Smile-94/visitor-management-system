@@ -1,0 +1,62 @@
+{% extends 'authority_base/base_authority.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block title %} {{title}} {% endblock title %}
+
+
+{% block body %}
+<div class="bg-light rounded h-100 p-4">
+    <div class="row">
+        <div class="col-md-4">
+            <h6 class="mb-4">Visitor List</h6>
+        </div>
+    </div>
+
+      <div class="col-md-6 mb-4">
+        <form class="d-flex">
+            <div class="row">
+                <div class="col ">
+                    {{visitors.form.email | add_class:"form-control" }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col ">
+                    <button class="btn btn-outline-success ms-2" type="submit">Search</button>
+                </div>
+            </div>
+        </form>
+      </div>
+    
+    <table class="table table-striped table-hover ">
+        <thead class="table-dark">
+            <tr>
+              <th scope="col">Sl</th>
+              <th scope="col">Email</th>
+              <th scope="col">Name</th>
+              <th scope="col">Visitor ID</th>
+              <th scope="col">Occupation</th>
+              <th scope="col">Phone No</th>
+              <th scope="col">Action</th>
+            </tr>
+          </thead>
+          <tbody> 
+            {% if visitors %} 
+                {% for visitor in visitors.qs %}
+                <tr>
+                    <th scope="row">{{forloop.counter}}</th>
+                    <td> {{visitor.email}} </td>
+                    <td> {{visitor.profile.first_name}} {{visitor.profile.last_name}}</td>
+                    <td>{{visitor.visitor_info.visitor_id}}</td>
+                    <td>{{visitor.visitor_info.occupation}}</td>
+                    <td>{{visitor.visitor_info.phone_no}}</td>
+                    <td>
+                        <a class="btn btn-success" href="{% url 'authority:visitor_details' visitor.id %}" role="button"><i class="fa-solid fa-eye"></i></a>
+                        <a class="btn btn-danger" href="{% url 'authority:delete_visitor' visitor.id %}" role="button"><i class="fa-solid fa-trash"></i></a>
+                    </td>
+                  </tr>
+                {% endfor %}     
+            {% endif %}     
+      </table>
+</div> 
+{% endblock body %}

@@ -13,25 +13,25 @@
             <tr>
               <th scope="col">Sl</th>
               <th scope="col">Name</th>
-              <th scope="col">Employee ID</th>
-              <th scope="col">Designation</th>
-              <th scope="col">Department</th>
-              <th scope="col">Delete</th>
+              <th scope="col">Visitor ID</th>
+              <th scope="col">Occupation</th>
+              <th scope="col">Phone No</th>
+              <th scope="col">Action</th>
             </tr>
           </thead>
           <tbody> 
-            {% if employee %} 
+            {% if visitor %} 
             
                 <tr>
                     <th scope="row">1</th>
-                    <td> {{employee.profile.first_name}} {{employee.profile.last_name}} </td>
-                    <td> {{employee.employee_info.employee_id}} </td>
-                    <td> {{employee.employee_info.position.designation}} </td>
-                    <td>{{employee.employee_info.position.department}}</td>
+                    <td> {{visitor.profile.first_name}} {{visitor.profile.last_name}} </td>
+                    <td> {{visitor.visitor_info.visitor_id}} </td>
+                    <td> {{visitor.visitor_info.occupation}} </td>
+                    <td>{{visitor.visitor_info.phone_no}}</td>
                     <td>
                         <div id="deleteForm">
                             <form action="" method='POST'> {% csrf_token %}
-                                <a class="btn btn-success" href="{% url 'authority:add_employee' %}" role="button"> <i class="fa-solid fa-arrow-left me-2"></i> Back</a>
+                                <a class="btn btn-success" href="{% url 'authority:visitor_list' %}" role="button"> <i class="fa-solid fa-arrow-left me-2"></i> Back</a>
                                 <button class="btn btn-danger" type='submit' id="deleteTask"><i class="fa-solid fa-trash px-2"></i>Delete</button>
                             </form>
                         </div>
