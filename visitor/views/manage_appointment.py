@@ -8,6 +8,7 @@ from visitor.permission import VisitorPassesTestMixin
 
 # Generic Classes
 from django.views.generic import ListView
+from django.views.generic import CreateView
 
 # Models 
 from appointment.models import Appointment
@@ -16,6 +17,9 @@ from employee.models import EmployeeInfo
 class EmployeeListView(ListView):
     model = EmployeeInfo
     template_name = 'visito/employee_list'
+
+class TakeAppointmentView(LoginRequiredMixin, VisitorPassesTestMixin, CreateView):
+    pass
 
 
 

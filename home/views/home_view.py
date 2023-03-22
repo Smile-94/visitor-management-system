@@ -9,8 +9,10 @@ from django.views.generic import ListView
 
 
 # Models
+from accounts.models import User
 from home.models import ContactMessage
 from employee.models import EmployeeInfo
+from appointment.models import Appointment
 
 # forms
 from home.forms import ContactMessageForm
@@ -35,6 +37,20 @@ class EmployeeListView(ListView):
         context = super().get_context_data(**kwargs)
         context["title"] = "Appointment" 
         return context
+
+class ApplintmentListView(ListView):
+    Model = Appointment
+    queryset = Appointment.objects.filter(is_active=True)
+    template_name = 'home/appointment_list.html'
+
+    def get_context_data(self, **kwargs):
+        pk = self.kwargs.get('pk', None)
+        user = User.objects.get(id=pk)
+        context = super().get_context_data(**kwargs)
+        context["title"] = 'Appointment List'
+        context["appointments"] = self.queryset.filter(appointment_of=user)
+        return context
+    
     
 
 class ContactMessageView(CreateView):

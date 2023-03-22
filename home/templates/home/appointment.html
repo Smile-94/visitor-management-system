@@ -5,6 +5,11 @@
 {% block title %} {{title}} {% endblock title %}
 
 
+{% block navbar %}
+  {% include 'home_utils/appoint_navbar.html' %}
+  
+{% endblock navbar %}
+
 {% block body %}
     
 <section id="hero" class="d-flex align-items-center">
@@ -46,7 +51,7 @@
                         <h4> {{employee.info_of.profile.first_name}} {{employee.info_of.profile.last_name}} </h4>
                         <span> {{employee.position.designation}} </span>
                         <p>{{employee.position.department}} </p>
-                        <p><a class="btn btn-sm btn-primary" href="#" role="button">Appointment</a> </p>
+                        <p><a class="btn btn-sm btn-primary" href="{% url 'home:appointment_list' employee.info_of.id %}" role="button">Appointment</a> </p>
                         <div class="social">
                           <a href=" {{employee.info_of.media_link.twitter}} " target="_blank"><i class="ri-twitter-fill"></i></a>
                           <a href="{{employee.info_of.media_link.facebook}}" target="_blank"><i class="ri-facebook-fill"></i></a>
