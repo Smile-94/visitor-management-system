@@ -1,0 +1,55 @@
+{% extends 'base_visitor/base.html' %}
+{% load static %}
+
+
+{% block title %}{% endblock title %}
+
+
+{% block body %}
+<!-- Recent Sales Start -->
+<div class="container-fluid pt-4 px-4">
+    <div class="bg-light text-center rounded p-4">
+        <div class="d-flex align-items-center justify-content-between mb-4">
+            <h6 class="mb-0">Appointment Details</h6>
+        </div>
+        {% if appointment %}
+        <div class="table-responsive">
+            <table class="table table-striped text-start align-middle table-bordered table-hover mb-0">
+                <thead>
+                    <tr class="table-dark ">
+                        <th class="col-4" scope="col-4">Fields Name</th>
+                        <th class="col-8" scope="col-8">Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                        <tr>
+                            <td> Visitor Name </td>
+                            <td> Hello World </td>
+                        </tr>  
+                        <tr>
+                            <td> Visitor ID </td>
+                            <td>  </td>
+                        </tr>  
+                        <tr>
+                            <td> Visitor Email </td>
+                            <td>  </td>
+                        </tr>  
+                        <tr>
+                            <td> Visitor  </td>
+                            <td>  </td>
+                        </tr>  
+                        <tr>
+                            <td> Visitor Address </td>
+                            <td> Hello World </td>
+                        </tr>  
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+            <h6 class="mb-0">There is no pending appointments</h6>
+        {% endif %}
+    </div>
+</div>
+<!-- Recent Sales End --> 
+{% endblock body %}
+    

@@ -3,6 +3,7 @@ from django.urls import path
 #Views
 from visitor.views import visitor_main
 from visitor.views import manage_profile
+from visitor.views import manage_appointment
 
 app_name='visitor'
 
@@ -17,3 +18,11 @@ urlpatterns += [
     path('edit-address/<int:pk>/', manage_profile.EditAddressView.as_view(), name='edit_address'),
     path('edit-media-link/<int:pk>/', manage_profile.UpdateMediaLinkView.as_view(), name='edit_media_link'),
 ]
+
+# Manage Appointment
+urlpatterns += [
+    path('appointment-application/<int:pk>/', manage_appointment.TakeAppointmentView.as_view(), name='take_appointment'),
+    path('pending-appointment-list/', manage_appointment.PendingAppointmentListView.as_view(), name='pending_appointment_list'),
+    path('visitor-appointment-details/<int:pk>/', manage_appointment.AppointmentDetailsView.as_view(), name='visitor_appointment_details'),
+]
+

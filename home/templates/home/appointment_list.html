@@ -67,7 +67,7 @@
                             <td> {{appointment.meet_from}} </td>
                             <td>{{appointment.meet_to}} </td>
                             <td> {{appointment.visiting_hour}} </td>
-                            <td><a class="btn btn-sm btn-primary" href="">Take Appointment</a></td>
+                            <td><a class="btn btn-sm btn-primary" href="{% url 'visitor:take_appointment' appointment.id %}">Take Appointment</a></td>
                           </tr>
                           
                         {% endfor %}

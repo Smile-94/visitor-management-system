@@ -115,13 +115,18 @@ class UserLoginView(View):
 
             if user is not None and request_user.is_visitor is True:
                 login(request, user)
-                messages.success(request, 'Welcome to your user panel')
-                return redirect(reverse('visitor:visitor_home'))
+               
+                if 'next' in request.POST:
+                    redirect_url = request.POST.get('next')
+                    return redirect(redirect_url)
+                else:
+                    return HttpResponseRedirect(reverse('visitor:visitor_home'))
+                
 
             elif user is not None and request_user.is_employee is True:
                 login(request, user)
                 messages.success(request, 'Welcome to your user panel')
-                return HttpResponseRedirect(reverse('employee:employee_home', ))
+                return HttpResponseRedirect(reverse('employee:employee_home'))
                 
             elif user is not None and not request_user.is_visitor and not request_user.is_employee:
                 login(request, user)

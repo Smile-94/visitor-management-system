@@ -20,7 +20,7 @@
                         </a>
                         <h3>Sign In</h3>
                     </div>
-                    <form action="" method="POST"> {% csrf_token %}
+                    <form action="{% url 'accounts:login' %}?next={{ request.path }}" method="POST"> {% csrf_token %}
                         
                         <div class="form-floating mb-3">
                             {{form.username| add_class:"form-control"}}
@@ -38,6 +38,10 @@
                             <a href="">Forgot Password</a>
                         </div>
                         <button type="submit" class="btn btn-primary py-3 w-100 mb-4">Sign In</button>
+                        
+                        {% if request.GET.next %}
+                            <input type="hidden" name="next" value="{{request.GET.next}}">
+                        {% endif %}
 
                     </form>
                     

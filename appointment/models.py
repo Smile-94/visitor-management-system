@@ -1,5 +1,6 @@
 from django.db import models
 from datetime import datetime
+import datetime
 
 # Models
 from accounts.models import User
@@ -27,14 +28,14 @@ class Appointment(models.Model):
 class AppointmentApplication(models.Model):
     appointment_of = models.ForeignKey(Appointment, on_delete=models.CASCADE, related_name='appointment_from')
     request_by = models.ForeignKey(User,on_delete=models.CASCADE, related_name='request_by')
-    issued_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='issued_by')
+    issued_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='issued_by', blank=True, null=True)
     appointment_id= models.CharField(max_length=20, unique=True, blank=True, null=True)
-    request_date = models.DateField(auto_now=False, auto_now_add=False)
-    approved_date = models.DateField(auto_now=False, auto_now_add=False)
-    heading = models.CharField(max_length=50)
+    request_date = models.DateField(auto_now_add=True)
+    approved_date = models.DateField(auto_now=False, auto_now_add=False, blank=True, null=True)
+    heading = models.CharField(max_length=100)
     description = models.TextField()
     accept_status = models.BooleanField(default=False)
-    meeting_time = models.TimeField(auto_now=False, auto_now_add=False,blank=True)
+    meeting_time = models.TimeField(auto_now=False, auto_now_add=False,blank=True, null=True)
     message = models.TextField()
     decline_status = models.BooleanField(default=False)
     cancel_status=models.BooleanField(default=False)
