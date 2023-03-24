@@ -113,7 +113,7 @@ class EmployeePendingAppointmentView(LoginRequiredMixin, EmployeePassesTestMixin
 
 class EmployeeAcceptedApointmentListView(LoginRequiredMixin, EmployeePassesTestMixin, ListView):
     Model = AppointmentApplication
-    queryset = AppointmentApplication.objects.filter(is_active=True, accept_status=True, decline_status=False)
+    queryset = AppointmentApplication.objects.filter(is_active=True, accept_status=True, decline_status=False, cancel_status=False)
     filterset_class = PendingAppointmentApplicationFilter
     template_name = 'employee/accepted_appointment_list.html'
 
@@ -140,6 +140,22 @@ class DeclinedAppointmentListView(LoginRequiredMixin, EmployeePassesTestMixin, L
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["title"] = 'Declined Appointment List'
+        context["appointments"] = self.filterset_class(self.request.GET, queryset=self.get_queryset())
+        return context
+
+class CancelAppointmentListView(LoginRequiredMixin, EmployeePassesTestMixin, ListView):
+    Model = AppointmentApplication
+    queryset = AppointmentApplication.objects.filter(is_active=True, cancel_status=True)
+    filterset_class = PendingAppointmentApplicationFilter
+    template_name = 'employee/cancel_appointment_list.html'
+
+    def get_queryset(self):
+        self.queryset = self.queryset.filter(appointment_of__appointment_of=self.request.user)
+        return super().get_queryset()
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["title"] = 'Cancel Appointment List'
         context["appointments"] = self.filterset_class(self.request.GET, queryset=self.get_queryset())
         return context
 

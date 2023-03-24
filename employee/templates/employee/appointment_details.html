@@ -22,6 +22,11 @@
                     <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal3">
                         Cancel
                     </button>
+                    <a class="btn btn-primary" href="{% url 'employee:employee_accepted_application_list' %}" role="button">Back</a>
+                {% elif appointment.cancel_status %}
+                    <a class="btn btn-primary" href="{% url 'employee:employee_cancel_application_list' %}" role="button">Back</a>
+                {% elif appointment.decline_status %}
+                    <a class="btn btn-primary" href="{% url 'employee:employee_declined_application_list' %}" role="button">Back</a>
                 {% endif %}
                     
             </div>
@@ -33,6 +38,7 @@
                 <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal2">
                     Decline
                 </button>
+                <a class="btn btn-primary" href="{% url 'employee:employee_pending_application_list' %}" role="button">Back</a>
             </div>
         {% endif %}
 
