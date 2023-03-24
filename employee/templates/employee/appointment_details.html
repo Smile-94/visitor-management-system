@@ -1,5 +1,6 @@
 {% extends 'employee_base/base.html' %}
 {% load static %}
+{% load widget_tweaks %}
 
 
 {% block title %} {{title}} {% endblock title %}
@@ -19,7 +20,9 @@
             </div>
         {% else %}
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                <a class="btn btn-sm btn-primary me-md-2" type="button">Accept</a>
+                <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    Accept
+                </button>
                 <a class="btn btn-sm btn-primary" type="button">Decline</a>
             </div>
         {% endif %}
@@ -103,6 +106,10 @@
                             <td>Request Date</td>
                             <td> {{appointment.request_date}} </td>
                         </tr>
+                        <tr>
+                            <td>Meeting Slot</td>
+                            <td> {{appointment.appointment_of.meet_from}} to {{appointment.appointment_of.meet_to}}</td>
+                        </tr>
                         {% if appointment.accept_status %}
                             <tr>
                                 <td> Accepted Date </td>
@@ -184,5 +191,41 @@
    
 </div>
 <!-- Recent Sales End --> 
+
+<!-- Button trigger modal -->
+
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header bg-dark">
+          <h1 class="modal-title text-white fs-5" id="exampleModalLabel">Accept Appointment</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form method="POST" action="{% url 'employee:employee_accept_appointment' appointment.id %}"> {% csrf_token %}
+                <div class="row mb-4">
+                    <div class="col">
+                        <label for="exampleInputEmail1" class="form-label"> Meeting Time </label>
+                        {{accept_form.meeting_time |add_class:"form-control"}}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <label for="exampleInputEmail1" class="form-label"> Replay Message </label>
+                        {{accept_form.message |add_class:"form-control"}}
+                    </div>
+                </div>
+            
+        </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Save</button>
+            </div>
+        </form>
+      </div>
+    </div>
+  </div>
 {% endblock body %}
     

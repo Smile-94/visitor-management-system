@@ -3,6 +3,7 @@ from django import forms
 
 # Models
 from appointment.models import Appointment
+from appointment.models import AppointmentApplication
 
 class AppointmentFilter(django_filters.FilterSet):
     appointment_date = django_filters.DateFilter(widget=forms.DateInput(attrs={'type': 'date'}))
@@ -13,3 +14,12 @@ class AppointmentFilter(django_filters.FilterSet):
     class Meta:
         model = Appointment
         fields = ('appointment_date','meet_from','meet_to',)
+
+
+class PendingAppointmentApplicationFilter(django_filters.FilterSet):
+    from_date = django_filters.DateFilter(field_name='request_date', lookup_expr='gte', widget=forms.DateInput(attrs={'type': 'date'}), label='From')
+    to_date = django_filters.DateFilter(field_name='request_date', lookup_expr='lte', widget=forms.DateInput(attrs={'type': 'date'}), label='To')
+
+    class Meta:
+        model = AppointmentApplication
+        fields = ('appointment_id', 'request_date')

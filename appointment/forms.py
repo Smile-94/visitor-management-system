@@ -20,3 +20,11 @@ class AppointmentApplicationForm(forms.ModelForm):
     class Meta:
         model = AppointmentApplication
         fields = ('heading','description')
+
+
+class AppointmentAcceptForm(forms.ModelForm):
+    meeting_time = forms.TimeField(widget=forms.TimeInput(attrs={'type': 'time'}))
+
+    class Meta:
+        model = AppointmentApplication
+        fields = ('meeting_time','message')

@@ -1,5 +1,6 @@
 {% extends 'employee_base/base.html' %}
 {% load static %}
+{% load widget_tweaks %}
 
 
 {% block title %} {{title}} {% endblock title %}
@@ -13,6 +14,22 @@
             <h6 class="mb-0">Pending Application List</h6>
         </div>
         {% if appointments %}
+        <div class="col-md-12 mb-4">
+            <form class="d-flex">
+                <div class="row g-3">
+                    <div class="col">
+                        {{appointments.form.appointment_id |add_class:"form-control"}}
+                    </div>
+                    <div class="col">
+                        {{appointments.form.from_date |add_class:"form-control"}}
+                    </div> 
+                    <div class="col">
+                        {{appointments.form.to_date |add_class:"form-control"}}
+                    </div>
+                  </div>
+              <button class="btn btn-outline-success ms-2" type="submit">Search</button>
+            </form>
+          </div>
         <div class="table-responsive">
             <table class="table text-start align-middle table-bordered table-hover mb-0">
                 <thead>
@@ -29,7 +46,7 @@
                 </thead>
                 <tbody>
                     
-                    {% for appointment  in appointments %}
+                    {% for appointment  in appointments.qs %}
                         <tr>
                             <td> {{forloop.counter}} </td>
                             <td> {{appointment.appointment_id}} </td>
