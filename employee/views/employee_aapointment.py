@@ -1,6 +1,7 @@
 from django.urls import reverse_lazy
 from django.shortcuts import redirect
 from django.contrib import messages
+from django.core.mail import send_mail
 import datetime
 
 # permission class
@@ -107,6 +108,22 @@ class EmployeePendingAppointmentView(LoginRequiredMixin, EmployeePassesTestMixin
         context["appointments"] = self.filterset_class(self.request.GET, queryset=self.get_queryset())
         return context
 
+class EmployeeAcceptedApointmentListView(LoginRequiredMixin, EmployeePassesTestMixin, ListView):
+    Model = AppointmentApplication
+    queryset = AppointmentApplication.objects.filter(is_active=True, accept_status=True, decline_status=False)
+    filterset_class = PendingAppointmentApplicationFilter
+    template_name = 'employee/accepted_appointment_list.html'
+
+    def get_queryset(self):
+        self.queryset = self.queryset.filter(appointment_of__appointment_of=self.request.user)
+        return super().get_queryset()
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["title"] = 'Appointment List'
+        context["appointments"] = self.filterset_class(self.request.GET, queryset=self.get_queryset())
+        return context
+
 class AcceptAppointmentView(LoginRequiredMixin, EmployeePassesTestMixin, UpdateView):
     model = AppointmentApplication
     form_class = AppointmentAcceptForm
@@ -126,6 +143,13 @@ class AcceptAppointmentView(LoginRequiredMixin, EmployeePassesTestMixin, UpdateV
                 form_obj.accept_status = True
                 form_obj.approved_date = datetime.date.today()
                 form_obj.save() 
+
+            # Send Mail
+            subject = 'Accept Appointment'
+            message = self.object.message
+            from_email = 'vsmpsm2023@gmail.com'
+            recipient_list = ['mshossen75@gmail.com',]
+            send_mail(subject, message, from_email, recipient_list, fail_silently=False)
             messages.success(self.request, "Appointment Accept Successfully")
             self.success_url = reverse_lazy('employee:employee_appointment_details', kwargs={'pk': self.object.id})
         except Exception as e:
