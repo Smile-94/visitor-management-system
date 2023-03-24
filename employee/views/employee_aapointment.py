@@ -10,9 +10,12 @@ from employee.permission import EmployeePassesTestMixin
 from django.views.generic import CreateView
 from django.views.generic import UpdateView
 from django.views.generic import DeleteView
+from django.views.generic import ListView
+from django.views.generic import DetailView
 
 # Models
 from appointment.models import Appointment
+from appointment.models import AppointmentApplication
 
 # Forms
 from appointment.forms import AppointmentForm
@@ -84,6 +87,31 @@ class DeleteAppointmentView(LoginRequiredMixin, EmployeePassesTestMixin, DeleteV
         self.object.is_active = False
         self.object.save()
         return redirect(self.success_url)
+
+class EmployeePendingAppointmentView(LoginRequiredMixin, EmployeePassesTestMixin, ListView):
+    Model = AppointmentApplication
+    queryset = AppointmentApplication.objects.filter(is_active=True, accept_status=False, decline_status=False)
+    context_object_name = 'appointments'
+    template_name = 'employee/pending_appointment_list.html'
+
+    def get_queryset(self):
+        self.queryset = self.queryset.filter(appointment_of__appointment_of=self.request.user)
+        return super().get_queryset()
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["title"] = 'Appointment List'
+        return context
+
+class EmployeeAppointmentDetailsView(LoginRequiredMixin, EmployeePassesTestMixin, DetailView):
+    model = AppointmentApplication
+    context_object_name = 'appointment'
+    template_name = 'employee/appointment_details.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["title"] = "Appointment Details"
+        return context
 
     
     
