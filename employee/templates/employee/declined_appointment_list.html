@@ -1,0 +1,71 @@
+{% extends 'employee_base/base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+
+{% block title %} {{title}} {% endblock title %}
+
+
+{% block body %}
+<!-- Recent Sales Start -->
+
+    <div class="bg-light text-center rounded p-4">
+        <div class="d-flex align-items-center justify-content-between mb-4">
+            <h6 class="mb-0">Pending Application List</h6>
+        </div>
+        {% if appointments %}
+        <div class="col-md-12 mb-4">
+            <form class="d-flex">
+                <div class="row g-3">
+                    <div class="col">
+                        {{appointments.form.appointment_id |add_class:"form-control"}}
+                    </div>
+                    <div class="col">
+                        {{appointments.form.from_date |add_class:"form-control"}}
+                    </div> 
+                    <div class="col">
+                        {{appointments.form.to_date |add_class:"form-control"}}
+                    </div>
+                  </div>
+              <button class="btn btn-outline-success ms-2" type="submit">Search</button>
+            </form>
+          </div>
+        <div class="table-responsive">
+            <table class="table text-start align-middle table-bordered table-hover mb-0">
+                <thead>
+                    <tr class="table-dark">
+                        <th scope="col">SL</th>
+                        <th scope="col">Appointment ID</th>
+                        <th scope="col">Request Date</th>
+                        <th scope="col">Request By</th>
+                        <th scope="col">Appointment Date</th>
+                        <th scope="col">Appointment From</th>
+                        <th scope="col">Appointment To</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                    {% for appointment  in appointments.qs %}
+                        <tr>
+                            <td> {{forloop.counter}} </td>
+                            <td> {{appointment.appointment_id}} </td>
+                            <td> {{appointment.request_date}} </td>
+                            <td> {{appointment.request_by.profile.first_name}} {{appointment.request_by.profile.last_name}}</td>
+                            <td> {{appointment.appointment_of.appointment_date}} </td>
+                            <td> {{ appointment.appointment_of.meet_from }} </td>
+                            <td> {{appointment.appointment_of.meet_to}} </td>
+                            <td><a class="btn btn-sm btn-primary" href="{% url 'employee:employee_appointment_details' appointment.id %}">Detail</a></td>
+                        </tr>
+                    {% endfor %}    
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+            <h6 class="mb-0">There is no pending appointments</h6>
+        {% endif %}
+    </div>
+
+<!-- Recent Sales End --> 
+{% endblock body %}
+    

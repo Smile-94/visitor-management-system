@@ -28,3 +28,10 @@ class AppointmentAcceptForm(forms.ModelForm):
     class Meta:
         model = AppointmentApplication
         fields = ('meeting_time','message')
+
+class AppointmentDeclineForm(forms.ModelForm):
+
+    class Meta:
+        model = AppointmentApplication
+        fields = ('message',)
+

@@ -29,7 +29,9 @@ urlpatterns += [
     # Appointment Application
     path('employee-pending-application-list/', employee_aapointment.EmployeePendingAppointmentView.as_view(), name= "employee_pending_application_list"),
     path('employee-accepted-application-list/', employee_aapointment.EmployeeAcceptedApointmentListView.as_view(), name= "employee_accepted_application_list"),
+    path('employee-declined-application-list/', employee_aapointment.DeclinedAppointmentListView.as_view(), name= "employee_declined_application_list"),
     path('employee-accept-appointment/<int:pk>/', employee_aapointment.AcceptAppointmentView.as_view(), name= "employee_accept_appointment"),
+    path('employee-decline-appointment/<int:pk>/', employee_aapointment.DeclineAppointmentView.as_view(), name= "employee_decline_appointment"),
     path('employee-appointment-details/<int:pk>/', employee_aapointment.EmployeeAppointmentDetailsView.as_view(), name= "employee_appointment_details"),
     
 ]

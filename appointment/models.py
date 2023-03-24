@@ -1,6 +1,6 @@
 from django.db import models
 from datetime import datetime
-import datetime
+from datetime import date
 
 # Models
 from accounts.models import User
@@ -46,9 +46,9 @@ class AppointmentApplication(models.Model):
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
         if not self.appointment_id:
-            year = str(datetime.date.today().year)[2:4]
-            month = str(datetime.date.today().month)
-            day = str(datetime.date.today().day)
+            year = str(date.today().year)[2:4]
+            month = str(date.today().month)
+            day = str(date.today().day)
             self.appointment_id = 'E'+year+month+day+str(self.pk).zfill(4)
             self.save()
     

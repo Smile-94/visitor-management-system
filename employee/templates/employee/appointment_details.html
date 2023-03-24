@@ -23,7 +23,9 @@
                 <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
                     Accept
                 </button>
-                <a class="btn btn-sm btn-primary" type="button">Decline</a>
+                <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal2">
+                    Decline
+                </button>
             </div>
         {% endif %}
 
@@ -211,6 +213,33 @@
                         {{accept_form.meeting_time |add_class:"form-control"}}
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col">
+                        <label for="exampleInputEmail1" class="form-label"> Replay Message </label>
+                        {{accept_form.message |add_class:"form-control"}}
+                    </div>
+                </div>
+            
+        </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Save</button>
+            </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 2 -->
+  <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header bg-dark">
+          <h1 class="modal-title text-white fs-5" id="exampleModalLabel">Decline Appointment</h1>
+          <button type="button" class="btn-close text-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form method="POST" action="{% url 'employee:employee_decline_appointment' appointment.id %}"> {% csrf_token %}
                 <div class="row">
                     <div class="col">
                         <label for="exampleInputEmail1" class="form-label"> Replay Message </label>
