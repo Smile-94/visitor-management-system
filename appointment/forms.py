@@ -35,3 +35,9 @@ class AppointmentDeclineForm(forms.ModelForm):
         model = AppointmentApplication
         fields = ('message',)
 
+class AppointmentCancelForm(forms.ModelForm):
+
+    class Meta:
+        model = AppointmentApplication
+        fields = ('cancel_message',)
+

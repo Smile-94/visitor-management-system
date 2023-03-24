@@ -24,6 +24,7 @@ from appointment.models import AppointmentApplication
 from appointment.forms import AppointmentForm
 from appointment.forms import AppointmentAcceptForm
 from appointment.forms import AppointmentDeclineForm
+from appointment.forms import AppointmentCancelForm
 
 # Filters
 from appointment.filters import AppointmentFilter
@@ -158,7 +159,7 @@ class AcceptAppointmentView(LoginRequiredMixin, EmployeePassesTestMixin, UpdateV
 
             if form.is_valid():
                 form_obj= form.save(commit=False)
-                form_obj.decline_status = True
+                form_obj.accept_status = True
                 form_obj.approved_date = datetime.date.today()
                 form_obj.save() 
 
@@ -206,7 +207,7 @@ class DeclineAppointmentView(LoginRequiredMixin, EmployeePassesTestMixin, Update
             from_email = 'vsmpsm2023@gmail.com'
             recipient_list = [ 'mshossen75@gmail.com',]
             send_mail(subject, message, from_email, recipient_list, fail_silently=False)
-            messages.success(self.request, "Appointment Accept Successfully")
+            messages.warning(self.request, "Appointment Declined Successfully")
             self.success_url = reverse_lazy('employee:employee_appointment_details', kwargs={'pk': self.object.id})
 
         except Exception as e:
@@ -219,6 +220,45 @@ class DeclineAppointmentView(LoginRequiredMixin, EmployeePassesTestMixin, Update
         messages.error(self.request, 'Something wrong try again!')
         return super().form_invalid(form)
 
+class CancelAppointmentView(LoginRequiredMixin, EmployeePassesTestMixin, UpdateView):
+    model = AppointmentApplication
+    form_class = AppointmentCancelForm
+    template_name = 'employee/appointment_accept.html'
+    success_url = reverse_lazy('employee:employee_appointment_details', kwargs={'pk': 0})
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["title"] = "Accept Appointment" 
+        return context
+    
+    def form_valid(self, form):
+        try:
+
+            if form.is_valid():
+                form_obj= form.save(commit=False)
+                form_obj.cancel_status = True
+                form_obj.save() 
+
+            # Send Mail
+            subject = 'Cancel Appointment'
+            message = self.object.cancel_message
+            from_email = 'vsmpsm2023@gmail.com'
+            recipient_list = [ 'mshossen75@gmail.com',]
+            send_mail(subject, message, from_email, recipient_list, fail_silently=False)
+            messages.warning(self.request, "Appointment Cancel Successfully")
+            self.success_url = reverse_lazy('employee:employee_appointment_details', kwargs={'pk': self.object.id})
+
+        except Exception as e:
+            print(e)
+            self.form_invalid(form)
+
+        return super().form_valid(form)
+
+    def form_invalid(self, form):
+        messages.error(self.request, 'Something wrong try again!')
+        return super().form_invalid(form)
+
+
 class EmployeeAppointmentDetailsView(LoginRequiredMixin, EmployeePassesTestMixin, DetailView):
     model = AppointmentApplication
     context_object_name = 'appointment'
@@ -229,6 +269,7 @@ class EmployeeAppointmentDetailsView(LoginRequiredMixin, EmployeePassesTestMixin
         context["title"] = "Appointment Details"
         context["accept_form"] = AppointmentAcceptForm
         context["decline_form"] = AppointmentDeclineForm
+        context["cancel_form"] = AppointmentCancelForm
         return context
 
     

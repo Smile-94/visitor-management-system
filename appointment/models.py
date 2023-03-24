@@ -39,7 +39,7 @@ class AppointmentApplication(models.Model):
     message = models.TextField()
     decline_status = models.BooleanField(default=False)
     cancel_status=models.BooleanField(default=False)
-    cancel_message=models.CharField(max_length=200,blank=True,null=True)
+    cancel_message = models.TextField(null=True)
     is_active = models.BooleanField(default=True)
     
 

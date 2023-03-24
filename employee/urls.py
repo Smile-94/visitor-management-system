@@ -32,6 +32,7 @@ urlpatterns += [
     path('employee-declined-application-list/', employee_aapointment.DeclinedAppointmentListView.as_view(), name= "employee_declined_application_list"),
     path('employee-accept-appointment/<int:pk>/', employee_aapointment.AcceptAppointmentView.as_view(), name= "employee_accept_appointment"),
     path('employee-decline-appointment/<int:pk>/', employee_aapointment.DeclineAppointmentView.as_view(), name= "employee_decline_appointment"),
+    path('employee-cancel-appointment/<int:pk>/', employee_aapointment.CancelAppointmentView.as_view(), name= "employee_cancel_appointment"),
     path('employee-appointment-details/<int:pk>/', employee_aapointment.EmployeeAppointmentDetailsView.as_view(), name= "employee_appointment_details"),
     
 ]
