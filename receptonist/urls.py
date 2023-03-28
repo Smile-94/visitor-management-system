@@ -4,6 +4,7 @@ app_name = 'receptonist'
 
 from receptonist.views import receptonist_main
 from receptonist.views import manage_profile
+from receptonist.views import manage_appointment
 
 
 urlpatterns = [
@@ -16,3 +17,11 @@ urlpatterns += [
     path('receptonist-social-media/<int:pk>/', manage_profile.ReceptonistSocialMediaLinkView.as_view(), name='receptonist_social_media'),
     
 ]
+
+# Manage Appointment
+
+urlpatterns += [
+    path('requested-appointment-list', manage_appointment.ReceptionAppointmentListView.as_view(), name='requested_appoinment_list' ),
+    path('requested-appointment-detail/<int:pk>/', manage_appointment.ReceponistAppointmentDetailsView.as_view(), name='receptonist_appoinment_details' )
+]
+

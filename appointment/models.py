@@ -34,11 +34,12 @@ class AppointmentApplication(models.Model):
     approved_date = models.DateField(auto_now=False, auto_now_add=False, blank=True, null=True)
     heading = models.CharField(max_length=100)
     description = models.TextField()
+    issued_status = models.BooleanField(default=False)
     accept_status = models.BooleanField(default=False)
     meeting_time = models.TimeField(auto_now=False, auto_now_add=False,blank=True, null=True)
     message = models.TextField()
     decline_status = models.BooleanField(default=False)
-    cancel_status=models.BooleanField(default=False)
+    cancel_status = models.BooleanField(default=False)
     cancel_message = models.TextField(null=True)
     is_active = models.BooleanField(default=True)
     

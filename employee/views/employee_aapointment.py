@@ -180,13 +180,17 @@ class AcceptAppointmentView(LoginRequiredMixin, EmployeePassesTestMixin, UpdateV
                 form_obj.save() 
 
             # Send Mail
-            subject = 'Accept Appointment'
-            message = self.object.message
-            from_email = 'vsmpsm2023@gmail.com'
-            recipient_list = [ self.object.request_by.email,]
-            send_mail(subject, message, from_email, recipient_list, fail_silently=False)
-            messages.success(self.request, "Appointment Accept Successfully")
-            self.success_url = reverse_lazy('employee:employee_appointment_details', kwargs={'pk': self.object.id})
+                try:
+                    subject = 'Accept Appointment'
+                    message = self.object.message
+                    from_email = 'vsmpsm2023@gmail.com'
+                    recipient_list = [ self.object.request_by.email,]
+                    send_mail(subject, message, from_email, recipient_list, fail_silently=False)
+                except Exception as e:
+                    print(e)
+
+                messages.success(self.request, "Appointment Accept Successfully")
+                self.success_url = reverse_lazy('employee:employee_appointment_details', kwargs={'pk': self.object.id})
         except Exception as e:
             print(e)
             self.form_invalid(form)
@@ -218,13 +222,17 @@ class DeclineAppointmentView(LoginRequiredMixin, EmployeePassesTestMixin, Update
                 form_obj.save() 
 
             # Send Mail
-            subject = 'Decline Appointment'
-            message = self.object.message
-            from_email = 'vsmpsm2023@gmail.com'
-            recipient_list = [ 'mshossen75@gmail.com',]
-            send_mail(subject, message, from_email, recipient_list, fail_silently=False)
-            messages.warning(self.request, "Appointment Declined Successfully")
-            self.success_url = reverse_lazy('employee:employee_appointment_details', kwargs={'pk': self.object.id})
+                try:
+                    subject = 'Decline Appointment'
+                    message = self.object.message
+                    from_email = 'vsmpsm2023@gmail.com'
+                    recipient_list = [ 'mshossen75@gmail.com',]
+                    send_mail(subject, message, from_email, recipient_list, fail_silently=False)
+                except Exception as e:
+                    print(e)
+
+                    messages.warning(self.request, "Appointment Declined Successfully")
+                    self.success_url = reverse_lazy('employee:employee_appointment_details', kwargs={'pk': self.object.id})
 
         except Exception as e:
             print(e)
@@ -255,14 +263,18 @@ class CancelAppointmentView(LoginRequiredMixin, EmployeePassesTestMixin, UpdateV
                 form_obj.cancel_status = True
                 form_obj.save() 
 
-            # Send Mail
-            subject = 'Cancel Appointment'
-            message = self.object.cancel_message
-            from_email = 'vsmpsm2023@gmail.com'
-            recipient_list = [ 'mshossen75@gmail.com',]
-            send_mail(subject, message, from_email, recipient_list, fail_silently=False)
-            messages.warning(self.request, "Appointment Cancel Successfully")
-            self.success_url = reverse_lazy('employee:employee_appointment_details', kwargs={'pk': self.object.id})
+                # Send Mail
+                try:
+                    subject = 'Cancel Appointment'
+                    message = self.object.cancel_message
+                    from_email = 'vsmpsm2023@gmail.com'
+                    recipient_list = [ 'mshossen75@gmail.com',]
+                    send_mail(subject, message, from_email, recipient_list, fail_silently=False)
+                except Exception as e:
+                    print(e)
+                messages.warning(self.request, "Appointment Cancel Successfully")
+                print("Self Object: ",self.object.id)
+                self.success_url = reverse_lazy('employee:employee_appointment_details', kwargs={'pk': self.object.id})
 
         except Exception as e:
             print(e)

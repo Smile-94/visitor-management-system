@@ -23,3 +23,5 @@ class PendingAppointmentApplicationFilter(django_filters.FilterSet):
     class Meta:
         model = AppointmentApplication
         fields = ('appointment_id', 'request_date')
+
+
