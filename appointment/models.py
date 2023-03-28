@@ -41,6 +41,9 @@ class AppointmentApplication(models.Model):
     decline_status = models.BooleanField(default=False)
     cancel_status = models.BooleanField(default=False)
     cancel_message = models.TextField(null=True)
+    entering_time = models.TimeField(auto_now=False, auto_now_add=False, null=True)
+    exit_time = models.TimeField(auto_now=False, auto_now_add=False, null=True)
+    duration = models.DurationField(blank=True, null=True)
     is_active = models.BooleanField(default=True)
     
 
