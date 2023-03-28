@@ -17,6 +17,7 @@ from django.views.generic import ListView
 from django.views.generic import DetailView
 
 # Models
+from accounts.models import User
 from appointment.models import Appointment
 from appointment.models import AppointmentApplication
 
@@ -300,5 +301,15 @@ class EmployeeAppointmentDetailsView(LoginRequiredMixin, EmployeePassesTestMixin
         context["cancel_form"] = AppointmentCancelForm
         return context
 
+class AppointmentVisitorProfileView(LoginRequiredMixin, EmployeePassesTestMixin, DetailView):
+    model = User
+    context_object_name = 'visitor'
+    template_name = 'employee/visitor_profile.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["title"] = 'Visitor Profile' 
+        return context
+    
     
     

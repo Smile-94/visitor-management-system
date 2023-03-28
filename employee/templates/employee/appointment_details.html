@@ -17,6 +17,7 @@
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                 <button class="btn btn-sm btn-primary me-md-2" type="button"><i class="fa-solid fa-file-arrow-down"></i></button>
                 <button class="btn btn-sm btn-primary" type="button"><i class="fa-solid fa-print"></i></button>
+                <a class="btn btn-primary" href="{% url 'employee:appointment_visitor_profile' appointment.request_by.id %}" target="_blank" role="button">Profile</a>
 
                 {% if appointment.accept_status and not appointment.cancel_status %}
                     <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal3">

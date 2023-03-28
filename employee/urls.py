@@ -35,5 +35,6 @@ urlpatterns += [
     path('employee-decline-appointment/<int:pk>/', employee_aapointment.DeclineAppointmentView.as_view(), name= "employee_decline_appointment"),
     path('employee-cancel-appointment/<int:pk>/', employee_aapointment.CancelAppointmentView.as_view(), name= "employee_cancel_appointment"),
     path('employee-appointment-details/<int:pk>/', employee_aapointment.EmployeeAppointmentDetailsView.as_view(), name= "employee_appointment_details"),
+    path('appointment-visitor-profile/<int:pk>/', employee_aapointment.AppointmentVisitorProfileView.as_view(),name='appointment_visitor_profile')
     
 ]
