@@ -102,7 +102,7 @@ class EmployeePendingAppointmentView(LoginRequiredMixin, EmployeePassesTestMixin
     template_name = 'employee/pending_appointment_list.html'
 
     def get_queryset(self):
-        self.queryset = self.queryset.filter(appointment_of__appointment_of=self.request.user)
+        self.queryset = self.queryset.filter(appointment_of__appointment_of=self.request.user).order_by('-id')
         return super().get_queryset()
 
     def get_context_data(self, **kwargs):
@@ -118,7 +118,7 @@ class EmployeeAcceptedApointmentListView(LoginRequiredMixin, EmployeePassesTestM
     template_name = 'employee/accepted_appointment_list.html'
 
     def get_queryset(self):
-        self.queryset = self.queryset.filter(appointment_of__appointment_of=self.request.user)
+        self.queryset = self.queryset.filter(appointment_of__appointment_of=self.request.user).order_by('-id')
         return super().get_queryset()
 
     def get_context_data(self, **kwargs):
@@ -134,7 +134,7 @@ class DeclinedAppointmentListView(LoginRequiredMixin, EmployeePassesTestMixin, L
     template_name = 'employee/declined_appointment_list.html'
 
     def get_queryset(self):
-        self.queryset = self.queryset.filter(appointment_of__appointment_of=self.request.user)
+        self.queryset = self.queryset.filter(appointment_of__appointment_of=self.request.user).order_by('-id')
         return super().get_queryset()
 
     def get_context_data(self, **kwargs):
@@ -150,7 +150,7 @@ class CancelAppointmentListView(LoginRequiredMixin, EmployeePassesTestMixin, Lis
     template_name = 'employee/cancel_appointment_list.html'
 
     def get_queryset(self):
-        self.queryset = self.queryset.filter(appointment_of__appointment_of=self.request.user)
+        self.queryset = self.queryset.filter(appointment_of__appointment_of=self.request.user).order_by('-id')
         return super().get_queryset()
 
     def get_context_data(self, **kwargs):
