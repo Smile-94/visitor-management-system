@@ -39,6 +39,13 @@ class MyUserManager(BaseUserManager):
         user.save(using=self._db)
         return user
     
+    def create_receptonist(self,email,password,**extra_fields):
+        user=self._create_user(email,password,**extra_fields)
+
+        user.is_receptonist = True
+        user.save(using=self._db)
+        return user
+    
     def create_superuser(self, email, password, **extra_fields):
         extra_fields.setdefault('is_staff',True)
         extra_fields.setdefault('is_superuser',True)
@@ -56,6 +63,7 @@ class User(AbstractBaseUser,PermissionsMixin):
     email=models.EmailField(unique=True,null=False)
     is_employee=models.BooleanField(default=False)
     is_visitor=models.BooleanField(default=False)
+    is_receptonist = models.BooleanField(default= False)
     is_staff=models.BooleanField(
         gettext_lazy('staff_status'),default=False,
         help_text=gettext_lazy('designets wheter the user can loing to this site'),

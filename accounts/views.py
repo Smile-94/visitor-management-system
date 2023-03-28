@@ -122,6 +122,11 @@ class UserLoginView(View):
                 else:
                     return HttpResponseRedirect(reverse('visitor:visitor_home'))
                 
+            elif user is not None and request_user.is_employee is True and request_user.is_receptonist is True:
+                login(request, user)
+                messages.success(request, 'Welcome to your user panel')
+                return HttpResponseRedirect(reverse('receptonist:receptonist'))
+
 
             elif user is not None and request_user.is_employee is True:
                 login(request, user)

@@ -9,7 +9,7 @@ from accounts.models import PermanentAddress
 # Register your models here.
 @admin.register(User)
 class UserAdmin(admin.ModelAdmin):
-    list_display=('email','is_employee','is_visitor','is_staff','is_active')
+    list_display=('email','is_employee','is_receptonist','is_visitor','is_staff','is_active')
     search_fields=('email',)
     list_filter=('email','is_visitor','is_employee')
     list_per_page=50
