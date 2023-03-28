@@ -70,9 +70,9 @@
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa-sharp fa-solid fa-handshake"></i>Appointment</a>
                         <div class="dropdown-menu bg-transparent border-0">
                             <a href="{% url 'visitor:pending_appointment_list'%}" class="nav-link dropdown-item"><i class="fa-sharp fa-solid fa-handshake"></i> Pending Appointment</a>
-                            <a href="{% url 'visitor:edit_profile' request.user.profile.id %}" class="nav-link dropdown-item"><i class="fa-solid fa-user-pen"></i>Add/Edit Profile</a>
-                            <a href="{% url 'visitor:edit_address' request.user.present_address.id %}" class="nav-link dropdown-item"><i class="fa-solid fa-user-pen"></i>Add/Edit Address</a>
-                            <a href="{% url 'visitor:edit_media_link' request.user.visitor_link.id %}" class="nav-link dropdown-item"><i class="fa-solid fa-user-pen"></i>Add/Edit Link</a>
+                            <a href="{% url 'visitor:accpted_appointment_list'%}" class="nav-link dropdown-item"><i class="fa-sharp fa-solid fa-handshake"></i> Accpted Appointment</a>
+                            <a href="{% url 'visitor:declined_appointment_list'%}" class="nav-link dropdown-item"><i class="fa-sharp fa-solid fa-handshake"></i> Declined Appointment</a>
+                            <a href="{% url 'visitor:cancel_appointment_list'%}" class="nav-link dropdown-item"><i class="fa-sharp fa-solid fa-handshake"></i> Cancel Appointment</a>
                         </div>
                     </div>
                     <div class="nav-item dropdown">

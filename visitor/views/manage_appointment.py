@@ -65,6 +65,52 @@ class PendingAppointmentListView(LoginRequiredMixin, VisitorPassesTestMixin, Lis
         context["title"] = 'Appointment List'
         return context
 
+class AccptedAppointmentListView(LoginRequiredMixin, VisitorPassesTestMixin, ListView):
+    Model = AppointmentApplication
+    queryset = AppointmentApplication.objects.filter(is_active=True, accept_status=True, decline_status=False, cancel_status=False)
+    context_object_name = 'appointments'
+    template_name = 'visitor/accpted_appointment.html'
+
+    def get_queryset(self):
+        self.queryset = self.queryset.filter(request_by=self.request.user)
+        return super().get_queryset()
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["title"] = 'Accpted Appointment List'
+        return context
+
+class DeclinedAppointmentListView(LoginRequiredMixin, VisitorPassesTestMixin, ListView):
+    Model = AppointmentApplication
+    queryset = AppointmentApplication.objects.filter(is_active=True, accept_status=False, decline_status=True)
+    context_object_name = 'appointments'
+    template_name = 'visitor/declined_appointment_list.html'
+
+    def get_queryset(self):
+        self.queryset = self.queryset.filter(request_by=self.request.user)
+        return super().get_queryset()
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["title"] = 'Declined Appointment List'
+        return context
+
+class CancelAppointmentListView(LoginRequiredMixin, VisitorPassesTestMixin, ListView):
+    Model = AppointmentApplication
+    queryset = AppointmentApplication.objects.filter(is_active=True, accept_status=True, decline_status=False, cancel_status=True)
+    context_object_name = 'appointments'
+    template_name = 'visitor/cancel_appointment.html'
+
+    def get_queryset(self):
+        self.queryset = self.queryset.filter(request_by=self.request.user)
+        return super().get_queryset()
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["title"] = 'Canceled Appointment List'
+        return context
+
+
 
 class AppointmentDetailsView(LoginRequiredMixin, VisitorPassesTestMixin, DetailView):
     model = AppointmentApplication

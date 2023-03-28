@@ -23,6 +23,9 @@ urlpatterns += [
 urlpatterns += [
     path('appointment-application/<int:pk>/', manage_appointment.TakeAppointmentView.as_view(), name='take_appointment'),
     path('pending-appointment-list/', manage_appointment.PendingAppointmentListView.as_view(), name='pending_appointment_list'),
+    path('accpted-appointment-list/', manage_appointment.AccptedAppointmentListView.as_view(), name='accpted_appointment_list'),
+    path('declined-appointment-list/', manage_appointment.DeclinedAppointmentListView.as_view(), name='declined_appointment_list'),
+    path('cancel-appointment-list/', manage_appointment.CancelAppointmentListView.as_view(), name='cancel_appointment_list'),
     path('visitor-appointment-details/<int:pk>/', manage_appointment.AppointmentDetailsView.as_view(), name='visitor_appointment_details'),
 ]
 

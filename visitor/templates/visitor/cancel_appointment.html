@@ -2,7 +2,7 @@
 {% load static %}
 
 
-{% block title %}{% endblock title %}
+{% block title %} {{title}} {% endblock title %}
 
 
 {% block body %}
@@ -10,7 +10,7 @@
 <div class="container-fluid pt-4 px-4">
     <div class="bg-light text-center rounded p-4">
         <div class="d-flex align-items-center justify-content-between mb-4">
-            <h6 class="mb-0">Pending Appointment List</h6>
+            <h6 class="mb-0">Canceled Application List</h6>
         </div>
         {% if appointments %}
         <div class="table-responsive">
@@ -22,8 +22,8 @@
                         <th scope="col">Request Date</th>
                         <th scope="col">Appointment To</th>
                         <th scope="col">Appointment Date</th>
-                        <th scope="col">Appointment From</th>
-                        <th scope="col">Appointment To</th>
+                        <th scope="col">Meeting Time</th>
+                        <th scope="col">Status</th>
                         <th scope="col">Action</th>
                     </tr>
                 </thead>
@@ -36,8 +36,10 @@
                             <td> {{appointment.request_date}} </td>
                             <td> {{appointment.appointment_of.appointment_of.profile.first_name}} {{appointment.appointment_of.appointment_of.profile.last_name}}</td>
                             <td> {{appointment.appointment_of.appointment_date}} </td>
-                            <td> {{ appointment.appointment_of.meet_from }} </td>
-                            <td> {{appointment.appointment_of.meet_to}} </td>
+                            <td> {{appointment.meeting_time}} </td>
+                            {% if appointment.cancel_status %}
+                                <td> Canceled </td>
+                            {% endif %}
                             <td><a class="btn btn-sm btn-primary" href="{% url 'visitor:visitor_appointment_details' appointment.id %}">Detail</a></td>
                         </tr>
                     {% endfor %}    
