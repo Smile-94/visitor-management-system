@@ -15,8 +15,8 @@
         </div>
         {% if appointment.accept_status or appointment.decline_status %}
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                <button class="btn btn-sm btn-primary me-md-2" type="button"><i class="fa-solid fa-file-arrow-down"></i></button>
-                <button class="btn btn-sm btn-primary" type="button"><i class="fa-solid fa-print"></i></button>
+                <a href=" {% url 'report:appointment_report' appointment.id %} " class="btn btn-sm btn-primary me-md-2" target="_blank" type="button"><i class="fa-solid fa-file-arrow-down"></i></a>
+                <a href=" {% url 'report:appointment_report' appointment.id %} "  class="btn btn-sm btn-primary" target="_blank" type="button"><i class="fa-solid fa-print"></i></a>
                 <a class="btn btn-primary" href="{% url 'employee:appointment_visitor_profile' appointment.request_by.id %}" target="_blank" role="button">Profile</a>
 
                 {% if appointment.accept_status and not appointment.cancel_status %}
@@ -117,6 +117,10 @@
                         <tr>
                             <td>Appointment Date</td>
                             <td> {{appointment.appointment_of.appointment_date}} </td>
+                        </tr>    
+                        <tr>
+                            <td>Appointment ID</td>
+                            <td> {{appointment.appointment_id}} </td>
                         </tr>    
                         <tr>
                             <td>Request Date</td>
