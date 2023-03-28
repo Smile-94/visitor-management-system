@@ -31,7 +31,7 @@ class ReceptonistSocialMediaLinkView(LoginRequiredMixin, ReceptonistPassesTestMi
 
     model = SocialMediaLink
     form_class = SocialMediaLinkForm
-    template_name = 'employee/social_media_link.html'
+    template_name = 'receptonist/receptonist_social_media.html'
     success_url = reverse_lazy('employee:employee_home')
 
     def get_context_data(self, **kwargs):

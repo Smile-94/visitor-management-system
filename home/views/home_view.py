@@ -29,7 +29,7 @@ class HomveView(TemplateView):
 
 class EmployeeListView(ListView):
     model = EmployeeInfo
-    queryset = EmployeeInfo.objects.filter(is_active=True)
+    queryset = EmployeeInfo.objects.filter(is_active=True, info_of__is_receptonist=False)
     context_object_name = 'employees'
     template_name = 'home/appointment.html' 
 
