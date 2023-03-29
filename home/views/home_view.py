@@ -1,6 +1,7 @@
 from django.urls import reverse_lazy
 from django.http import JsonResponse
 from django.contrib import messages
+from datetime import date
 
 # Generic View Class
 from django.views.generic import TemplateView
@@ -40,7 +41,7 @@ class EmployeeListView(ListView):
 
 class ApplintmentListView(ListView):
     Model = Appointment
-    queryset = Appointment.objects.filter(is_active=True)
+    queryset = Appointment.objects.filter(is_active=True,appointment_date__gte=date.today())
     template_name = 'home/appointment_list.html'
 
     def get_context_data(self, **kwargs):

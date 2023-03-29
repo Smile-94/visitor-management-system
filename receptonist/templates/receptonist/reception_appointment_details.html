@@ -14,14 +14,16 @@
             <h5 class="mb-0">Appointment Details</h5>
         </div>
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                <button class="btn btn-sm btn-primary me-md-2" type="button"><i class="fa-solid fa-file-arrow-down"></i></button>
-                <button class="btn btn-sm btn-primary" type="button"><i class="fa-solid fa-print"></i></button>
+                <a href="{% url 'report:appointment_report' appointment.id %}" class="btn btn-sm btn-primary me-md-2" target="_blank" type="button"><i class="fa-solid fa-file-arrow-down"></i></a>
+                <a href="{% url 'report:appointment_report' appointment.id %}" class="btn btn-sm btn-primary" target="_blank" type="button"><i class="fa-solid fa-print"></i></a>
 
                 {% if not appointment.issued_status %}
                     <a class="btn btn-primary" href="{% url 'receptonist:requested_appoinment_list' %}" role="button">Back</a>
                 {% endif %}
-                {% if appointment.accept_status and not appointment.cancel_status %}
-                    <a class="btn btn-primary" href="{% url 'employee:employee_cancel_application_list' %}" role="button">Issued</a>
+                {% if appointment.accept_status and not appointment.cancel_status and not appointment.issued_status %}
+                    <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    Issued
+                    </button>
                 {% endif %}
                     
             </div>
@@ -102,6 +104,10 @@
                             <td> {{appointment.appointment_of.appointment_date}} </td>
                         </tr>    
                         <tr>
+                            <td>Appointment ID</td>
+                            <td> {{appointment.appointment_id}} </td>
+                        </tr>    
+                        <tr>
                             <td>Request Date</td>
                             <td> {{appointment.request_date}} </td>
                         </tr>
@@ -143,6 +149,16 @@
                                 <td> Cancel </td>
                             </tr>
                         {% endif %} 
+                        {% if appointment.issued_status %}
+                            <tr>
+                                <td> Entering Time</td>
+                                <td> {{appointment.entering_time}} </td>
+                            </tr> 
+                            <tr>
+                                <td> Exit Time </td>
+                                <td> {{exit.entering_time}} </td>
+                            </tr>
+                        {% endif %} 
                 </tbody>
             </table>
         </div>
@@ -160,24 +176,17 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header bg-dark">
-          <h1 class="modal-title text-white fs-5" id="exampleModalLabel">Accept Appointment</h1>
+          <h1 class="modal-title text-white fs-5" id="exampleModalLabel">Issue Appointment</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-            <form method="POST" action="{% url 'employee:employee_accept_appointment' appointment.id %}"> {% csrf_token %}
+            <form method="POST" action="{% url 'receptonist:issued_appoinment' appointment.id %}"> {% csrf_token %}
                 <div class="row mb-4">
                     <div class="col">
-                        <label for="exampleInputEmail1" class="form-label"> Meeting Time </label>
-                        {{accept_form.meeting_time |add_class:"form-control"}}
+                        <label for="exampleInputEmail1" class="form-label"> Entering Time </label>
+                        {{form.entering_time |add_class:"form-control"}}
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col">
-                        <label for="exampleInputEmail1" class="form-label"> Replay Message </label>
-                        {{accept_form.message |add_class:"form-control"}}
-                    </div>
-                </div>
-            
         </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -188,58 +197,6 @@
     </div>
   </div>
 
-  <!-- Reject Appointment 2 -->
-  <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header bg-dark">
-          <h1 class="modal-title text-white fs-5" id="exampleModalLabel">Decline Appointment</h1>
-          <button type="button" class="btn-close text-white" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-            <form method="POST" action="{% url 'employee:employee_decline_appointment' appointment.id %}"> {% csrf_token %}
-                <div class="row">
-                    <div class="col">
-                        <label for="exampleInputEmail1" class="form-label"> Replay Message </label>
-                        {{accept_form.message |add_class:"form-control"}}
-                    </div>
-                </div>
-            
-        </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Save</button>
-            </div>
-        </form>
-      </div>
-    </div>
-  </div>
-
-  <!-- Cancel Appointment Modal-->
-  <div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header bg-dark">
-          <h1 class="modal-title text-white fs-5" id="exampleModalLabel">Cancel Appointment</h1>
-          <button type="button" class="btn-close text-white" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-            <form method="POST" action="{% url 'employee:employee_cancel_appointment' appointment.id %}"> {% csrf_token %}
-                <div class="row">
-                    <div class="col">
-                        <label for="exampleInputEmail1" class="form-label"> Cancelation Reason </label>
-                        {{cancel_form.cancel_message |add_class:"form-control"}}
-                    </div>
-                </div>
-            
-        </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Save</button>
-            </div>
-        </form>
-      </div>
-    </div>
-  </div>
+  
 {% endblock body %}
     

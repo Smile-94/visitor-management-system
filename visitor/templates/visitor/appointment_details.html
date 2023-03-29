@@ -149,6 +149,16 @@
                                 <td> Cancel </td>
                             </tr>
                         {% endif %} 
+                        {% if appointment.issued_status %}
+                            <tr>
+                                <td> Entering Time </td>
+                                <td> {{appointment.entering_time}} </td>
+                            </tr> 
+                            <tr>
+                                <td> Exit Time </td>
+                                <td> {{appointment.exit_time}} </td>
+                            </tr>
+                        {% endif %} 
                 </tbody>
             </table>
         </div>

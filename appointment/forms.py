@@ -41,3 +41,10 @@ class AppointmentCancelForm(forms.ModelForm):
         model = AppointmentApplication
         fields = ('cancel_message',)
 
+class IssuedAppointmentForm(forms.ModelForm):
+    entering_time = forms.TimeField(widget=forms.TimeInput(attrs={'type': 'time'}))
+    
+    class Meta:
+        model = AppointmentApplication
+        fields = ('entering_time',)
+
