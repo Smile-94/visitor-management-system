@@ -7,9 +7,70 @@
 
 
 {% block body %}
-    <div class="col-md-6 text-center">
-        <h3>Receptonist</h3>
-    </div>   
+    <!-- Sale & Revenue Start -->
+    <div class="container-fluid pt-4 px-4">
+        <div class="row g-4">
+            <div class="col-sm-6 col-xl-3">
+                <div class="bg-dark rounded d-flex align-items-center justify-content-between p-4">
+                    <div class="ms-3 text-white">
+                        <p class="mb-2">Appointment Today</p>
+                        <h6 class="mb-0 text-white"> {{appointment_today}} </h6>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-xl-3">
+                <div class="bg-dark rounded d-flex align-items-center justify-content-between p-4">
+                    
+                    <div class="ms-3 text-white">
+                        <p class="mb-2">Not Issued</p>
+                        <h6 class="mb-0 text-white"> {{not_issued}} </h6>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-xl-3">
+                <div class="bg-dark rounded d-flex align-items-center justify-content-between p-4">
+                    
+                    <div class="ms-3 text-white">
+                        <p class="mb-2">Issued Appointment</p>
+                        <h6 class="mb-0 text-white"> {{issued}} </h6>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-xl-3">
+                <div class="bg-dark rounded d-flex align-items-center justify-content-between p-4">
+                    
+                    <div class="ms-3 text-white">
+                        <p class="mb-2">Clock</p>
+                        <h6 class="mb-0 text-white"><div id="clock"></div></h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Sale & Revenue End -->
+    
+<script>
+    function displayTime() {
+        var date = new Date();
+        var hours = date.getHours();
+        var minutes = date.getMinutes();
+        var seconds = date.getSeconds();
+        var ampm = hours >= 12 ? 'PM' : 'AM';
+    
+        hours = hours % 12;
+        hours = hours ? hours : 12; // the hour '0' should be '12'
+        minutes = minutes < 10 ? '0'+minutes : minutes;
+        seconds = seconds < 10 ? '0'+seconds : seconds;
+    
+        var time = hours + ':' + minutes + ':' + seconds + ' ' + ampm;
+    
+        document.getElementById('clock').innerHTML = time;
+    
+        setTimeout(displayTime, 1000); // update every second
+    }
+    
+    displayTime();
+</script>   
 {% endblock body %}
 
 

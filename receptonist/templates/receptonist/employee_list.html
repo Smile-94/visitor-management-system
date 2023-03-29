@@ -1,0 +1,131 @@
+{% extends 'receptonist_base/receptonist_base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block title %} {{title}} {% endblock title %}
+
+
+{% block body %}
+<div class="bg-light rounded h-100 p-4">
+    <div class="row">
+        <div class="col-md-4">
+            <h6 class="mb-4">Employee List</h6>
+        </div>
+      </div>
+
+      <div class="col-md-12 mb-4">
+        <form class="d-flex">
+            <div class="row">
+                <div class="col ">
+                    {{users.form.employee_id | add_class:"form-control" }}
+                </div>
+                <div class="col ">
+                    {{users.form.position__designation | add_class:"form-control" }}
+                </div>
+                <div class="col ">
+                    {{users.form.position__department | add_class:"form-control" }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col ">
+                    <button class="btn btn-outline-success ms-2" type="submit">Search</button>
+                </div>
+            </div>
+        </form>
+      </div>
+    
+    <table class="table table-striped table-bordered table-hover ">
+        <thead class="table-dark">
+            <tr>
+              <th scope="col">Sl</th>
+              <th scope="col">Name</th>
+              <th scope="col">Employee ID</th>
+              <th scope="col">Designation</th>
+              <th scope="col">Department</th>
+              <th scope="col">Action</th>
+            </tr>
+          </thead>
+          <tbody> 
+            {% if users %} 
+                {% for user in users.qs %}
+                <tr>
+                    <th scope="row">{{forloop.counter}}</th>
+                    <td> {{user.info_of.profile.first_name}} {{user.info_of.profile.last_name}}</td>
+                    <td>{{user.employee_id}}</td>
+                    <td>{{user.position.designation}}</td>
+                    <td>{{user.position.department}}</td>
+                    <td>
+                        <button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal-{{user.id}}">Add Appointment</button> 
+                    </td>
+                  </tr>
+                  <!-- Modal -->
+                    <div class="modal fade" id="exampleModal-{{user.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">On Arival Appointment</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form method="POST"> {% csrf_token %}
+                                    <div class="row mb-2">
+                                        <div class="col">
+                                            <label for="exampleInputEmail1" class="form-label">Visitor Name</label>
+                                            {{form.request_by |add_class:"form-control"}}
+                                        </div>
+                                        <div class="col">
+                                            <label for="exampleInputEmail1" class="form-label">NID</label>
+                                            {{form.national_id |add_class:"form-control"}}
+                                        </div>
+                                        
+                                    </div>
+                                    <div class="row mb-2">
+                                        <div class="col">
+                                            <label for="exampleInputEmail1" class="form-label">Occupation</label>
+                                            {{form.occupation |add_class:"form-control"}}
+                                        </div>
+                                        <div class="col">
+                                            <label for="exampleInputEmail1" class="form-label">Designation</label>
+                                            {{form.designation |add_class:"form-control"}}
+                                        </div>
+                                    </div>
+                                    <div class="row mb-2">
+                                        <div class="col">
+                                            <label for="exampleInputEmail1" class="form-label">Address</label>
+                                            {{form.address |add_class:"form-control"}}
+                                        </div>
+                                    </div>
+                                    <div class="row mb-2">
+                                        <div class="col">
+                                            <label for="exampleInputEmail1" class="form-label">Visitor Phone</label>
+                                            {{form.phone_no |add_class:"form-control"}}
+                                        </div>
+                                        <div class="col">
+                                            <label for="exampleInputEmail1" class="form-label">Visitor Email</label>
+                                            {{form.email_id |add_class:"form-control"}}
+                                        </div>
+                                    </div>
+                                    <div class="row mb-2">
+                                        <div class="col">
+                                            <label for="exampleInputEmail1" class="form-label">Entering Time</label>
+                                            {{form.entering_time |add_class:"form-control"}}
+                                        </div>
+                                    </div>
+                                    <input type="hidden" name="pk" value="{{ user.id }}">
+                            </div>
+                            <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="Submit" class="btn btn-primary">Save</button>
+                            </div>
+                        </form>
+                        </div>
+                        </div>
+                    </div>
+                {% endfor %}     
+            {% endif %}     
+      </table>
+</div>
+
+
+  
+{% endblock body %}

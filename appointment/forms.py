@@ -3,6 +3,7 @@ from django import forms
 # models
 from appointment.models import Appointment
 from appointment.models import AppointmentApplication
+from appointment.models import OnArivalAppointmentApplication
 
 
 class AppointmentForm(forms.ModelForm):
@@ -55,3 +56,10 @@ class IssuedAppointmentExitForm(forms.ModelForm):
     class Meta:
         model = AppointmentApplication
         fields = ('exit_time',)
+
+
+class OnArivalAppointApplicationForm(forms.ModelForm):
+    entering_time = forms.TimeField(widget=forms.TimeInput(attrs={'type': 'time'}))
+    class Meta:
+        model = OnArivalAppointmentApplication
+        exclude = ('appointment_to','issued_by','appointment_id','issued_status','exit_time','duration','is_active')

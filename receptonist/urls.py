@@ -5,6 +5,7 @@ app_name = 'receptonist'
 from receptonist.views import receptonist_main
 from receptonist.views import manage_profile
 from receptonist.views import manage_appointment
+from receptonist.views import onarival_appointment
 
 
 urlpatterns = [
@@ -19,7 +20,6 @@ urlpatterns += [
 ]
 
 # Manage Appointment
-
 urlpatterns += [
     path('requested-appointment-list', manage_appointment.ReceptionAppointmentListView.as_view(), name='requested_appoinment_list' ),
     path('issued-appointment-list', manage_appointment.ReceptonistIssuedAppointmentListView.as_view(), name='issued_appoinment_list' ),
@@ -27,4 +27,11 @@ urlpatterns += [
     path('issued-appointment/<int:pk>/', manage_appointment.IssuedAppointmentView.as_view(), name='issued_appoinment' ),
     path('exit-appointment/<int:pk>/', manage_appointment.ExitIssuedAppointmentView.as_view(), name='exit_appoinment' ),
 ]
+
+# On Arival Appointment
+urlpatterns += [
+    path('onarival-employee-list/', onarival_appointment.OnArivalAppointmentView.as_view(), name='onarival_employee_list'),
+    path('onarival-appointment-list/', onarival_appointment.OnArivalAppointmentListView.as_view(), name='onarival_appointmetn_list'),
+]
+
 
