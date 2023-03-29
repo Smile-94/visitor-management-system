@@ -7,14 +7,74 @@
 
 {% block body %}
     <!-- Blank Start -->
-    <div class="container-fluid pt-4 px-4">
-        <div class="row vh-100 bg-light rounded align-items-center justify-content-center mx-0">
-            <div class="col-md-6 text-center">
-                <h3>Admin Panele</h3>
+        <!-- Sale & Revenue Start -->
+        <div class="container-fluid pt-4 px-4">
+            <div class="row g-4">
+                <div class="col-sm-6 col-xl-3">
+                    <div class="bg-dark rounded d-flex align-items-center justify-content-between p-4">
+                        <div class="ms-3 text-white">
+                            <p class="mb-2">Total Employee</p>
+                            <h6 class="mb-0 text-white"> {{total_employee}} </h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-xl-3">
+                    <div class="bg-dark rounded d-flex align-items-center justify-content-between p-4">
+                        <div class="ms-3 text-white">
+                            <p class="mb-2">Total Visitor</p>
+                            <h6 class="mb-0 text-white"> {{total_visitor}} </h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-xl-3">
+                    <div class="bg-dark rounded d-flex align-items-center justify-content-between p-4">
+                        <div class="ms-3 text-white">
+                            <p class="mb-2">Total Appointment</p>
+                            <h6 class="mb-0 text-white"> {{total_appointment}} </h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-xl-3">
+                    <div class="bg-dark rounded d-flex align-items-center justify-content-between p-4">
+                        <div class="ms-3 text-white">
+                            <p class="mb-2">Clock</p>
+                            <h6 class="mb-0 text-white"><div id="clock"></div></h6>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-    <!-- Blank End -->
+        <!-- Sale & Revenue End -->
+   
+
+    <script>
+        function displayTime() {
+            var date = new Date();
+            var hours = date.getHours();
+            var minutes = date.getMinutes();
+            var seconds = date.getSeconds();
+            var ampm = hours >= 12 ? 'PM' : 'AM';
+        
+            hours = hours % 12;
+            hours = hours ? hours : 12; // the hour '0' should be '12'
+            minutes = minutes < 10 ? '0'+minutes : minutes;
+            seconds = seconds < 10 ? '0'+seconds : seconds;
+        
+            var time = hours + ':' + minutes + ':' + seconds + ' ' + ampm;
+        
+            document.getElementById('clock').innerHTML = time;
+        
+            setTimeout(displayTime, 1000); // update every second
+        }
+        
+        displayTime();
+    </script> 
     
 {% endblock body %}
+
+
+{% block footer %}
+    
+{% endblock footer %}
+    
     
