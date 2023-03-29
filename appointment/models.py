@@ -48,14 +48,18 @@ class AppointmentApplication(models.Model):
     
 
     def save(self, *args, **kwargs):
-        super().save(*args, **kwargs)
         if not self.appointment_id:
             year = str(date.today().year)[2:4]
             month = str(date.today().month)
             day = str(date.today().day)
             self.appointment_id = 'E'+year+month+day+str(self.pk).zfill(4)
-            self.save()
-    
+
+        if self.entering_time and self.exit_time:
+            duration = datetime.combine(datetime.today(), self.exit_time) - datetime.combine(datetime.today(), self.entering_time)
+            self.duration = duration
+
+        super().save(*args, **kwargs)
+
     def __str__(self):
         return str(self.request_by)
     

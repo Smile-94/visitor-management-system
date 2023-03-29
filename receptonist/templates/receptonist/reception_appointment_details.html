@@ -1,4 +1,4 @@
-{% extends 'employee_base/base.html' %}
+{% extends 'receptonist_base/receptonist_base.html' %}
 {% load static %}
 {% load widget_tweaks %}
 
@@ -156,7 +156,11 @@
                             </tr> 
                             <tr>
                                 <td> Exit Time </td>
-                                <td> {{exit.entering_time}} </td>
+                                <td> {{appointment.exit_time}} </td>
+                            </tr>
+                            <tr>
+                                <td> Duration </td>
+                                <td> {{appointment.duration}} </td>
                             </tr>
                         {% endif %} 
                 </tbody>
@@ -199,4 +203,9 @@
 
   
 {% endblock body %}
+
+{% block footer %}
+    
+{% endblock footer %}
+    
     

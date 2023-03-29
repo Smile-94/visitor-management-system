@@ -22,7 +22,9 @@ urlpatterns += [
 
 urlpatterns += [
     path('requested-appointment-list', manage_appointment.ReceptionAppointmentListView.as_view(), name='requested_appoinment_list' ),
-    path('requested-appointment-detail/<int:pk>/', manage_appointment.ReceponistAppointmentDetailsView.as_view(), name='receptonist_appoinment_details' ),
+    path('issued-appointment-list', manage_appointment.ReceptonistIssuedAppointmentListView.as_view(), name='issued_appoinment_list' ),
+    path('receptonist-requested-appointment-detail/<int:pk>/', manage_appointment.ReceponistAppointmentDetailsView.as_view(), name='receptonist_appoinment_details' ),
     path('issued-appointment/<int:pk>/', manage_appointment.IssuedAppointmentView.as_view(), name='issued_appoinment' ),
+    path('exit-appointment/<int:pk>/', manage_appointment.ExitIssuedAppointmentView.as_view(), name='exit_appoinment' ),
 ]
 

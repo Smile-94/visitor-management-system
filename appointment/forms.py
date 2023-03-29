@@ -48,3 +48,10 @@ class IssuedAppointmentForm(forms.ModelForm):
         model = AppointmentApplication
         fields = ('entering_time',)
 
+
+class IssuedAppointmentExitForm(forms.ModelForm):
+    exit_time = forms.TimeField(widget=forms.TimeInput(attrs={'type': 'time'}))
+    
+    class Meta:
+        model = AppointmentApplication
+        fields = ('exit_time',)
