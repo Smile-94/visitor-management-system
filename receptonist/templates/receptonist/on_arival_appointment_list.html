@@ -58,14 +58,14 @@
                                 {{appointment.exit_time}}
                             </td>
                             <td>
-                                <a class="btn btn-sm btn-primary" href="{% url 'receptonist:receptonist_appoinment_details' appointment.id %}">Detail</a>
-                                <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                <a class="btn btn-sm btn-primary" href="{% url 'receptonist:onarival_appointmetn_details' appointment.id %}">Detail</a>
+                                <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal-{{appointment.id}}">
                                     Exit
                                 </button>
                             </td>
                         </tr>
                         <!-- Accept Appointment Modal -->
-                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal fade" id="exampleModal-{{appointment.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header bg-dark">
@@ -73,7 +73,7 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
-                                    <form method="POST" action="{% url 'receptonist:exit_appoinment' appointment.id %}"> {% csrf_token %}
+                                    <form method="POST" action="{% url 'receptonist:onarival_appointmetn_exit' appointment.id %}"> {% csrf_token %}
                                         <div class="row mb-4">
                                             <div class="col">
                                                 <label for="exampleInputEmail1" class="form-label"> Exit Time </label>

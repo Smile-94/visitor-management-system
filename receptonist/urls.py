@@ -32,6 +32,8 @@ urlpatterns += [
 urlpatterns += [
     path('onarival-employee-list/', onarival_appointment.OnArivalAppointmentView.as_view(), name='onarival_employee_list'),
     path('onarival-appointment-list/', onarival_appointment.OnArivalAppointmentListView.as_view(), name='onarival_appointmetn_list'),
+    path('onarival-appointment-exit/<int:pk>/', onarival_appointment.OnArivalAppointmentExitView.as_view(), name='onarival_appointmetn_exit'),
+    path('onarival-appointment-deatails/<int:pk>/', onarival_appointment.OnArivalAppointmentDetailView.as_view(), name='onarival_appointmetn_details'),
 ]
 
 

@@ -4,6 +4,8 @@ from django.contrib import messages
 # Generic Classes
 from django.views.generic import CreateView
 from django.views.generic import ListView
+from django.views.generic import UpdateView
+from django.views.generic import DetailView
 
 # Permission Classes
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -19,6 +21,7 @@ from appointment.filters import OnArivalAppointmentFilter
 
 # Forms Classes
 from appointment.forms import OnArivalAppointApplicationForm
+from appointment.forms import OnArivalAppointmentExitForm
 
 
 
@@ -75,4 +78,36 @@ class OnArivalAppointmentListView(LoginRequiredMixin, ReceptonistPassesTestMixin
         context = super().get_context_data(**kwargs)
         context["title"] = 'Appointment List'
         context["appointments"] = self.filterset_class(self.request.GET, queryset=self.queryset)
+        context["form"] = OnArivalAppointmentExitForm
+        return context
+
+class OnArivalAppointmentExitView(LoginRequiredMixin, ReceptonistPassesTestMixin, UpdateView):
+    model = OnArivalAppointmentApplication
+    form_class = OnArivalAppointmentExitForm
+    template_name = 'receptonist/issued_appointment.html'
+    success_url = reverse_lazy('receptonist:onarival_appointmetn_list')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["title"] = "Exit Appointment"
+        return context
+    
+    def form_valid(self, form):
+        exit_time = form.cleaned_data.get('exit_time')
+        messages.success(self.request, f"Visito Exit at {exit_time}")
+        return super().form_valid(form)
+
+    def form_invalid(self, form):
+        messages.error(self.request, "Something wrong try again!")
+        return super().form_invalid(form)
+
+
+class OnArivalAppointmentDetailView(LoginRequiredMixin, ReceptonistPassesTestMixin, DetailView):
+    model = OnArivalAppointmentApplication
+    context_object_name = 'appointment'
+    template_name = 'receptonist/onarival_appointment_details.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["title"] = "Appointment Details"
         return context

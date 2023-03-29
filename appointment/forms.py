@@ -63,3 +63,11 @@ class OnArivalAppointApplicationForm(forms.ModelForm):
     class Meta:
         model = OnArivalAppointmentApplication
         exclude = ('appointment_to','issued_by','appointment_id','issued_status','exit_time','duration','is_active')
+
+
+class OnArivalAppointmentExitForm(forms.ModelForm):
+    exit_time = forms.TimeField(widget=forms.TimeInput(attrs={'type': 'time'}))
+    
+    class Meta:
+        model = OnArivalAppointmentApplication
+        fields = ('exit_time',)
