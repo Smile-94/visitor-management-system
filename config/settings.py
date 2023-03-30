@@ -50,7 +50,6 @@ INSTALLED_APPS = [
     # Third party packages
     'widget_tweaks',
     'django_filters',
-    "phonenumber_field",
 ]
 
 MIDDLEWARE = [
