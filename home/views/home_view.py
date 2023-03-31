@@ -43,7 +43,7 @@ class EmployeeListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["title"] = "Appointment" 
+        context["title"] = "Appointment"
         return context
 
 class ApplintmentListView(ListView):

@@ -64,6 +64,7 @@ class EmployeeInfo(models.Model):
             day = str(datetime.date.today().day)
             self.employee_id = 'E'+year+month+day+str(self.pk).zfill(4)
             self.save()
+    
 
     def __str__(self):
         return str(f"{self.info_of}'s Info")
@@ -93,4 +94,5 @@ class Review(models.Model):
     review_message = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True)
+
 
