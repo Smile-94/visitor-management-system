@@ -1,0 +1,184 @@
+{% extends 'home_base/home_base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+
+{% block title %} {{title}} {% endblock title %}
+
+
+{% block style %}
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="{% static 'js/star-rating.js' %}"></script>
+<link href="{% static 'css/star-rating.css' %}" media="all" rel="stylesheet" type="text/css" />
+<style>
+    .star-rating {
+      color: #ddd;
+    }
+    .star-rating .fa-star {
+      color: #FFD700; /* Golden color */
+    }
+    .star-rating[data-rating="1"] .fa-star:nth-child(-n+1),
+    .star-rating[data-rating="2"] .fa-star:nth-child(-n+2),
+    .star-rating[data-rating="3"] .fa-star:nth-child(-n+3),
+    .star-rating[data-rating="4"] .fa-star:nth-child(-n+4),
+    .star-rating[data-rating="5"] .fa-star:nth-child(-n+5) {
+      color: #FFD700; /* Golden color */
+    }
+</style>
+  
+  
+{% endblock style %}
+  
+
+{% block navbar %}
+  {% include 'home_utils/appoint_navbar.html' %}
+  
+{% endblock navbar %}
+
+{% block body %}
+    
+<section id="hero" class="d-flex align-items-center">
+
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6 d-flex flex-column justify-content-center pt-4 pt-lg-0 order-2 order-lg-1" data-aos="fade-up" data-aos-delay="200">
+          <h1>Debonair Group</h1>
+          <h2>Way Towards Sustainablility</h2>
+          <div class="d-flex justify-content-center justify-content-lg-start">
+          </div>
+        </div>
+        <div class="col-lg-6 order-1 order-lg-2 hero-img" data-aos="zoom-in" data-aos-delay="200">
+          <img src=" {% static 'assets/img/hero-img.png' %} " class="img-fluid animated" alt="">
+        </div>
+      </div>
+    </div>
+
+  </section><!-- End Hero -->
+  
+
+  <main id="main">
+    <!-- ======= Team Section ======= -->
+    <section id="team" class="team section-bg">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+          <h2>Employee Details</h2>
+        </div>
+
+        <div class="row">
+                <div class="col-lg-12 mb-4" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="member d-flex align-items-center">
+                      <a href=""><div class="pic"><img src="{{employee.info_of.profile.photo.url}}" alt="" width="100" height="110"></div></a>
+                      <div class="member-info">
+                        <h4> {{employee.info_of.profile.first_name}} {{employee.info_of.profile.last_name}} </h4>
+                        <span> {{employee.position.designation}} </span>
+                        <p>Total rating: {{ total_rating.avg_rating|floatformat:"1" }}/5 </p>
+                        <div class="star-rating" data-rating="{{ total_rating.avg_rating }}"></div>
+                        <p>{{employee.position.department}} </p>
+                        <p><a class="btn btn-sm btn-primary" href="{% url 'home:appointment_list' employee.info_of.id %}" role="button">Appointment</a> </p>
+                        
+                        
+                        <div class="social">
+                          <a href=" {{employee.info_of.media_link.twitter}} " target="_blank"><i class="ri-twitter-fill"></i></a>
+                          <a href="{{employee.info_of.media_link.facebook}}" target="_blank"><i class="ri-facebook-fill"></i></a>
+                          <a href="{{employee.info_of.media_link.instagram}}" target="_blank"><i class="ri-instagram-fill"></i></a>
+                          <a href="{{employee.info_of.media_link.linkedin}}" target="_blank"> <i class="ri-linkedin-box-fill"></i> </a>
+                        </div>
+                      </div>
+                      <div class="ms-4">
+                        <form method="POST" action="{% url 'home:add_review' employee.pk %}"> {% csrf_token %}
+                        <div class="row ">
+                            <h4> Leave a Replay </h4>
+                            <div class="col-8">
+                                <label for="exampleInputEmail1" class="form-label">Subject</label>
+                                {{form.subject |add_class:"form-control"}}
+                            </div>
+                            <div class="col-4">
+                                <label for="exampleInputEmail1" class="form-label">Rating</label>
+                                {{form.rating |add_class:"form-select"}}
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col">
+                                <label for="exampleInputEmail1" class="form-label">Review Message</label>
+                                {{form.review_message |add_class:"form-control"}}
+                            </div>
+                        </div>
+                        <div class="row mt-2 p-4">
+                            <input type="hidden" name="pk" value="{{employee.id}}">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </form>
+                    </div>
+                    </div>
+                    
+                  </div> 
+                
+                    {% if reviews %}
+                      <div class="container " id="reviews-container">
+                        {% for review in reviews %}
+                          <div class="card mb-4 ">
+                            <div class="card-header bg-primary text-white">
+                              <h6>{{review.review_by.profile.first_name}} {{review.review_by.profile.last_name}}, {{review.created_at}} | Rating: <span class="star-rating" data-rating="{{ review.rating }}"></span></h6>
+                            </div>
+                            <div class="card-body">
+                              <h5 class="card-title">{{review.subject}}</h5>
+                              {% if review.review_message|length > 100 %}
+                                <p class="card-text">{{ review.review_message|slice:":100" }}<span class="more-text" style="display:none">{{ review.review_message|slice:"100:" }}</span><span class="read-more text-primary" style="cursor:pointer">...<br><button class="btn btn-link text-primary">Read more</button></span></p>
+                              {% else %}
+                                <p class="card-text">{{ review.review_message }}</p>
+                              {% endif %}
+                            </div>
+                          </div>
+                        {% endfor %}
+                        
+                      </div>
+                    {% endif %}
+        </div>
+        
+      </div>
+    </section><!-- End Team Section -->
+</main><!-- End #main -->
+
+<script>
+  // Show/hide more text on button click
+  document.querySelectorAll('.read-more').forEach(button => {
+    button.addEventListener('click', function() {
+      const moreText = button.previousElementSibling;
+      if (moreText.style.display === 'none') {
+        moreText.style.display = 'inline';
+        button.textContent = 'Read less';
+        button.classList.add('text-primary');
+      } else {
+        moreText.style.display = 'none';
+        button.textContent = 'Read more';
+        button.classList.add('text-primary');
+      }
+    });
+  });
+
+
+  $(document).ready(function() {
+    $('.star-rating').each(function() {
+      var rating = $(this).data('rating');
+      for (var i = 0; i < rating; i++) {
+        $(this).append('<i class="fa fa-star" aria-hidden="true"></i>');
+      }
+    });
+  });
+
+  $('.star-rating').rating({
+    min: 0,
+    max: 5,
+    step: 1,
+    size: 'md',
+    displayOnly: true,
+    showClear: false,
+    showCaption: false,
+    filledStar: '<i class="fa fa-star"></i>',
+    emptyStar: '<i class="fa fa-star-o"></i>'
+});
+</script>
+
+{% endblock body %}

@@ -28,7 +28,7 @@ class TakeAppointmentView(LoginRequiredMixin, VisitorPassesTestMixin, CreateView
     model = AppointmentApplication
     form_class = AppointmentApplicationForm
     template_name = 'visitor/appointment_application.html'
-    success_url = reverse_lazy('visitor:visitor_home')
+    success_url = reverse_lazy('visitor:pending_appointment_list')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

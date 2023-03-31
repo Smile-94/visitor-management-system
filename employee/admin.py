@@ -3,6 +3,7 @@ from django.contrib import admin
 # Models
 from employee.models import EmployeeInfo
 from employee.models import SocialMediaLink
+from employee.models import Review
 
 # Register your models here.
 @admin.register(EmployeeInfo)
@@ -15,3 +16,7 @@ class EmployeeInfoAdmin(admin.ModelAdmin):
 @admin.register(SocialMediaLink)
 class SocialMediaLinkAdmin(admin.ModelAdmin):
     list_display = ('link_of',)
+
+@admin.register(Review)
+class Review(admin.ModelAdmin):
+    list_display = ('review_of','review_by','rating','created_at')

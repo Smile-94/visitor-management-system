@@ -81,13 +81,16 @@ class SocialMediaLink(models.Model):
 class Review(models.Model):
     RATING_CHOICES = (
         (1, 'Poor(1)'),
-        (2, 'Fair(1)'),
-        (3, 'Good(1)'),
-        (4, 'Very Good(1)'),
-        (5, 'Excellent(1)')
+        (2, 'Fair(2)'),
+        (3, 'Good(3)'),
+        (4, 'Very Good(4)'),
+        (5, 'Excellent(5)')
     )
     review_of = models.ForeignKey(User,on_delete=models.CASCADE,related_name='review_of')
     review_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name= 'review_by')
     rating = models.IntegerField(choices=RATING_CHOICES)
     subject = models.CharField(max_length=100)
-    review_message= models.TextField()
+    review_message = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    modified_at = models.DateTimeField(auto_now=True)
+

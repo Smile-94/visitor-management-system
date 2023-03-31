@@ -11,5 +11,6 @@ urlpatterns = [
     path('appointment/', home_view.EmployeeListView.as_view(), name='employee_list'),
     path('appointment-list/<int:pk>/', home_view.ApplintmentListView.as_view(), name='appointment_list'),
     path('contact-message/', home_view.ContactMessageView.as_view(), name='contact_message'),
-    
+    path('employee-details/<int:pk>/', home_view.EmployeeDetailsView.as_view(), name='employee_details'),
+    path('add-review/<int:pk>', home_view.AddReviewView.as_view(), name='add_review'), 
 ]

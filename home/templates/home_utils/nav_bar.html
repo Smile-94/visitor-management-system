@@ -9,7 +9,17 @@
         </ul>
       </li>
       <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
-      <li><a class="getstarted scrollto" href="{% url 'accounts:login' %}">Login/Register</a></li>
+      {% if user.is_authenticated %}
+          
+          {% if user.is_visitor %}
+            <li><a href="{% url 'visitor:visitor_home' %}" class="nav-link scrollto" href="#contact">Profile</a></li>
+          {% endif %}
+            
+          <li><a class="getstarted scrollto" href="{% url 'accounts:logout' %}">Logout</a></li>
+      {% else %}
+          <li><a class="getstarted scrollto" href="{% url 'accounts:login' %}">Login/Register</a></li>
+      {% endif %}
+      
     </ul>
     <i class="bi bi-list mobile-nav-toggle"></i>
 </nav><!-- .navbar -->

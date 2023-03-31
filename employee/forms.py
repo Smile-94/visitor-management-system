@@ -4,6 +4,7 @@ from django import forms
 from employee.models import EmployeeInfo
 from employee.models import DesignationInfo
 from employee.models import SocialMediaLink
+from employee.models import Review
 
 # Widgets
 from employee.widgets import CustomPictureImageFieldWidget
@@ -31,3 +32,10 @@ class SocialMediaLinkForm(forms.ModelForm):
     class Meta:
         model = SocialMediaLink
         exclude = ('link_of',)
+
+
+class ReviewForm(forms.ModelForm):
+
+    class Meta:
+        model = Review
+        fields= ('rating','subject','review_message')
