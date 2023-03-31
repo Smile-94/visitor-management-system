@@ -67,7 +67,7 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                <form method="POST"> {% csrf_token %}
+                                <form method="POST" enctype="multipart/form-data"> {% csrf_token %}
                                     <div class="row mb-2">
                                         <div class="col">
                                             <label for="exampleInputEmail1" class="form-label">Visitor Name</label>
@@ -110,6 +110,11 @@
                                             <label for="exampleInputEmail1" class="form-label">Entering Time</label>
                                             {{form.entering_time |add_class:"form-control"}}
                                         </div>
+                                        <div class="col">
+                                            <label for="exampleInputEmail1" class="form-label">Entering Time</label>
+                                            {{form.photo |add_class:"form-control"}}
+                                            <a href="https://www.rapidtables.com/tools/camera.html" target="_blank">Capture photo</a>
+                                        </div>
                                     </div>
                                     <input type="hidden" name="pk" value="{{ user.id }}">
                             </div>
@@ -126,6 +131,4 @@
       </table>
 </div>
 
-
-  
 {% endblock body %}

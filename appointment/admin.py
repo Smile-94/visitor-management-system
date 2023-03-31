@@ -21,4 +21,4 @@ class AppointmentApplicationAdmin(admin.ModelAdmin):
 
 @admin.register(OnArivalAppointmentApplication)
 class OnarivalAppointmentApplicationAdmin(admin.ModelAdmin):
-    list_display =('appointment_to','request_by','national_id','phone_no')
+    list_display =('appointment_to','request_by','national_id','phone_no','photo')

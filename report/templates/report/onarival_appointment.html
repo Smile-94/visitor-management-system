@@ -109,7 +109,12 @@
 <body>
     <div class="profile-container">
         <div class="photo">
-          <img src="/media/{{appointment.request_by.profile.photo}}" alt="Profile Photo">
+          {% if appointment.photo %}
+              <img src="{{ appointment.photo.url}}" alt="Appointment photo">
+          {% else %}
+              No photo available
+          {% endif %}
+          {% comment %} <img src="data:image/png;base64,{{ appointment.photo }}" alt="Profile Photo"> {% endcomment %}
         </div>
         <div class="details">
           <div class="designation"> {{appointment.request_by}}</div>

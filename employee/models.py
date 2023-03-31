@@ -77,3 +77,17 @@ class SocialMediaLink(models.Model):
 
     def __str__(self):
         return str(self.link_of)
+
+class Review(models.Model):
+    RATING_CHOICES = (
+        (1, 'Poor(1)'),
+        (2, 'Fair(1)'),
+        (3, 'Good(1)'),
+        (4, 'Very Good(1)'),
+        (5, 'Excellent(1)')
+    )
+    review_of = models.ForeignKey(User,on_delete=models.CASCADE,related_name='review_of')
+    review_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name= 'review_by')
+    rating = models.IntegerField(choices=RATING_CHOICES)
+    subject = models.CharField(max_length=100)
+    review_message= models.TextField()

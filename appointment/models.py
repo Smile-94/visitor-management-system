@@ -2,6 +2,8 @@ from django.db import models
 from datetime import datetime
 from datetime import date
 
+
+
 # Models
 from accounts.models import User
 
@@ -79,6 +81,7 @@ class OnArivalAppointmentApplication(models.Model):
     entering_time = models.TimeField(auto_now=False, auto_now_add=False, null=True)
     exit_time = models.TimeField(auto_now=False, auto_now_add=False, null=True)
     duration = models.DurationField(blank=True, null=True)
+    photo = models.ImageField(upload_to='appointment/', null=True)
     is_active = models.BooleanField(default=True)
     
 

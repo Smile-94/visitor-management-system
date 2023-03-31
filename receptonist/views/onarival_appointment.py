@@ -1,11 +1,14 @@
 from django.urls import reverse_lazy
 from django.contrib import messages
 
+from django.http import JsonResponse
+
 # Generic Classes
 from django.views.generic import CreateView
 from django.views.generic import ListView
 from django.views.generic import UpdateView
 from django.views.generic import DetailView
+from django.views.generic import TemplateView
 
 # Permission Classes
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -44,6 +47,7 @@ class OnArivalAppointmentView(LoginRequiredMixin, ReceptonistPassesTestMixin, Cr
         initial = super().get_initial()
         initial['pk'] = self.request.POST.get('pk')
         return initial
+
     
     def form_valid(self, form):
         try:
@@ -54,6 +58,7 @@ class OnArivalAppointmentView(LoginRequiredMixin, ReceptonistPassesTestMixin, Cr
                 form_obj.appointment_to = employee_obj.info_of
                 form_obj.issued_by = self.request.user
                 form_obj.issued_status=True
+
                 form_obj.save()
                 messages.success(self.request, "On Arival Appointment Added Successfully")
         
@@ -62,7 +67,6 @@ class OnArivalAppointmentView(LoginRequiredMixin, ReceptonistPassesTestMixin, Cr
         
         return super().form_valid(form)
 
-    
     def form_invalid(self, form):
         messages.error(self.request, "Something went wrong try again!")
         return super().form_invalid(form)
@@ -111,3 +115,5 @@ class OnArivalAppointmentDetailView(LoginRequiredMixin, ReceptonistPassesTestMix
         context = super().get_context_data(**kwargs)
         context["title"] = "Appointment Details"
         return context
+
+ 

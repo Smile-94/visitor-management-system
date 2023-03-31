@@ -9,6 +9,7 @@ from receptonist.permissions import ReceptonistPassesTestMixin
 from django.views.generic import ListView
 from django.views.generic import DetailView
 from django.views.generic import UpdateView
+from django.views.generic import TemplateView
 
 # Models
 from appointment.models import AppointmentApplication
@@ -106,4 +107,7 @@ class ExitIssuedAppointmentView(LoginRequiredMixin, ReceptonistPassesTestMixin, 
     def form_invalid(self, form):
         messages.error(self.request, "Something wrong try again!")
         return super().form_invalid(form)
+
+
+   
     
