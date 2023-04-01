@@ -2,8 +2,6 @@ from django.db import models
 from datetime import datetime
 from datetime import date
 
-
-
 # Models
 from accounts.models import User
 
