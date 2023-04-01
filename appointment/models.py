@@ -51,6 +51,7 @@ class AppointmentApplication(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.appointment_id:
+            self.pk = None
             year = str(date.today().year)[2:4]
             month = str(date.today().month)
             day = str(date.today().day)
@@ -92,7 +93,7 @@ class OnArivalAppointmentApplication(models.Model):
             year = str(date.today().year)[2:4]
             month = str(date.today().month)
             day = str(date.today().day)
-            self.appointment_id = 'O' + year + month + day + str(self.pk).zfill(4)
+            self.appointment_id = 'OA' + year + month + day + str(self.pk).zfill(4)
 
         if self.entering_time and self.exit_time:
             duration = datetime.combine(datetime.today(), self.exit_time) - datetime.combine(datetime.today(), self.entering_time)
